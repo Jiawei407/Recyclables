@@ -1,0 +1,170 @@
+<?php
+$page='user/submit-evidence-upload-failed.php';
+$page_role='user';
+require __DIR__ . '/../includes/bootstrap.php';
+require __DIR__ . '/../includes/data.php';
+require __DIR__ . '/../includes/metrics.php';
+?>
+<!DOCTYPE html>
+<html lang="en" class="workspace-page">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Recyclables Registered User: Submit Evidence.">
+    <title>Submit Evidence — Recyclables</title>
+    <link rel="icon" href="../assets/brand-mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#dialog-title">Skip to content</a>
+    <!-- Keep this background container inert while the dialog is open. -->
+    <div class="app-shell" inert>
+      <!-- Workspace navigation -->
+      <aside class="app-sidebar" aria-label="Registered User workspace">
+        <a class="brand" href="../index.php">
+          <img src="../assets/brand-mark.svg" alt="" width="32" height="32">
+          <span>recyclables.</span>
+        </a>
+        <div class="sidebar-context">
+          <span class="eyebrow">Your workspace</span>
+          <strong>Registered User</strong>
+        </div>
+        <nav class="sidebar-nav" aria-label="Workspace navigation">
+          <a class="sidebar-link" href="../user/home.php">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <path d="m3 10 9-7 9 7v10H3V10Zm6 10v-7h6v7"></path>
+            </svg>
+            <span>Home</span>
+          </a>
+          <a class="sidebar-link" href="../user/challenges-browse.php">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <path d="M20 4c0 9-4 14-10 14-4 0-6-2-6-6C4 6 11 4 20 4Z"></path>
+              <path d="m4 21 11-11"></path>
+            </svg>
+            <span>Challenges</span>
+          </a>
+          <a class="sidebar-link is-active" href="../user/submit-evidence-new-submission.php" aria-current="page">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5"></path>
+            </svg>
+            <span>Submit Evidence</span>
+          </a>
+          <a class="sidebar-link" href="../user/achievements-earned.php">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <circle cx="12" cy="8" r="5"></circle>
+              <path d="m8 12-1 9 5-3 5 3-1-9"></path>
+            </svg>
+            <span>Achievements</span>
+          </a>
+          <a class="sidebar-link" href="../user/leaderboard-individual-ranking.php">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <path d="M4 3v17h17M8 16v-4m5 4V7m5 9v-6"></path>
+            </svg>
+            <span>Leaderboard</span>
+          </a>
+          <a class="sidebar-link" href="../user/profile-profile.php">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"></path>
+            </svg>
+            <span>Profile</span>
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <a class="sidebar-back" href="../index.php">Back to public home</a>
+        <form method="post"><?php echo csrf_field(); ?><input type="hidden" name="action" value="logout"><button class="button button--quiet" type="submit">Log out</button></form></div>
+      </aside>
+      <!-- Account and location -->
+      <header class="workspace-header">
+        <span class="workspace-location">Submit Evidence</span>
+        <div class="account-chip">
+          <span class="avatar">—</span>
+          <div>
+            <strong><?php echo e($user['full_name'] ?? 'Your account'); ?></strong>
+            <span><?php echo e($user['faculty'] ?? ''); ?></span>
+          </div>
+        </div>
+      </header>
+      <!-- Main page content -->
+      <main id="main-content" class="workspace-content">
+        <!-- Page title and actions -->
+        <div class="page-header">
+          <div>
+            <h1>Submit Evidence</h1>
+            <p class="context-line">Registered User</p>
+            <p class="page-description">Clear evidence. A considered review.</p>
+          </div>
+        </div>
+        <div class="stack">
+          <nav class="page-tabs" aria-label="Section views">
+            <a href="../user/submit-evidence-new-submission.php" class="is-active" aria-current="page">New submission</a>
+            <a href="../user/submit-evidence-submission-status.php">Submission status</a>
+          </nav>
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Submit evidence</h2>
+            </div>
+            <div class="form-grid">
+              <fieldset class="challenge-choice-field field-full">
+                <legend>Choose a challenge</legend>
+                <div class="challenge-choice-grid"><?php include __DIR__ . '/../includes/evidence_choices.php'; ?></div>
+              </fieldset>
+              <div class="upload-zone field-full">
+                <h3>Photo evidence</h3>
+                <div class="photo-preview-empty" data-photo-preview="">
+                  <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+                    <path d="M3 7h4l2-3h6l2 3h4v13H3Z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                  </svg>
+                  <p>No photo selected</p>
+                </div>
+                <div class="form-actions">
+                  </div>
+                <p class="field-hint">JPG or PNG.</p>
+              <label class="button button--outline"><span data-file-name="backend-upload">Choose photo</span><input class="visually-hidden" type="file" id="backend-upload" form="backend-form" name="photo" accept="image/jpeg,image/png" required></label></div>
+              <div class="field field-full">
+                <label for="evidence-description">Description</label>
+                <textarea id="evidence-description" name="evidence-description" rows="4" aria-describedby="evidence-description-hint" form="backend-form"></textarea>
+                <small class="field-hint" id="evidence-description-hint">Describe what you did and where.</small>
+              <label for="quantity">Number of items or actions shown</label><input id="quantity" form="backend-form" name="quantity" type="number" min="1" max="1000000" value="1" required></div>
+            </div>
+            <div class="form-actions">
+              <button class="button button--primary" type="submit" form="backend-form">Submit evidence</button>
+              <a class="button button--outline" href="../user/challenges-my-challenges.php">Cancel</a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div class="dialog-overlay">
+      <!-- Dialog state: close returns to the parent page -->
+      <section class="action-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+        <header class="dialog-header">
+          <div>
+            <h2 id="dialog-title">Upload failed</h2>
+            <p class="context-line">Registered User</p>
+          </div>
+          <a class="close-button" href="../user/submit-evidence-new-submission.php" aria-label="Close dialog">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <path d="m6 6 12 12M6 18 18 6"></path>
+            </svg>
+          </a>
+        </header>
+        <?php include __DIR__ . '/../includes/notices.php'; ?><div class="dialog-content">
+          <div class="photo-preview-empty">
+            <svg class="icon" aria-hidden="true" viewbox="0 0 24 24">
+              <path d="M3 7h4l2-3h6l2 3h4v13H3Z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <p>No photo selected</p>
+          </div>
+          <p class="error-message">The photo could not be uploaded.</p>
+          <p>Choose a JPG or PNG photo and try again.</p>
+          <div class="form-actions">
+            <a class="button button--primary" href="../user/submit-evidence-upload-photo.php">Try again</a>
+          </div>
+        </div>
+      <form id="backend-form" method="post" enctype="multipart/form-data" hidden=""><?php echo csrf_field(); ?><input type="hidden" name="action" value="submit-evidence" form="backend-form"><input type="hidden" name="id" value="<?php echo (int)$id; ?>" form="backend-form"></form></section>
+    </div>
+  <script src="../scripts/app.js" defer></script></body>
+</html>
