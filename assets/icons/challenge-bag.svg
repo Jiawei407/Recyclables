@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 256 256" stroke-linecap="round" stroke-linejoin="round">
+  <title>Reusable shopping tote</title>
+  <!-- Original editable vector artwork, drawn and exported with tldraw. -->
+  <g transform="translate(-960 0)">
+  <g transform="matrix(1, 0, 0, 1, 1009, 219)" opacity="0.07"><path fill="#10251D" d="M 0 4.5 C 0 2.0147 35.3695 0 79 0 C 122.6305 0 158 2.0147 158 4.5 C 158 6.9853 122.6305 9 79 9 C 35.3695 9 0 6.9853 0 4.5"/><path stroke-width="2" d="M 0 4.5 C 0 2.0147 35.3695 0 79 0 C 122.6305 0 158 2.0147 158 4.5 C 158 6.9853 122.6305 9 79 9 C 35.3695 9 0 6.9853 0 4.5" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 1053.68, 52)" opacity="1"><path stroke-width="2" d="M 0 35.64 C 0 15.9566 14.9895 0 33.48 0 C 51.9705 0 66.96 15.9566 66.96 35.64 C 66.96 55.3234 51.9705 71.28 33.48 71.28 C 14.9895 71.28 0 55.3234 0 35.64" fill="none" stroke="#285B45"/></g>
+  <g transform="matrix(1, 0, 0, 1, 1031, 94.12)" opacity="1"><path fill="#FFFDF7" d="M 0 0 L 112.32 0 L 112.32 122.04 L 0 122.04 Z"/><path stroke-width="2" d="M 0 0 L 112.32 0 L 112.32 122.04 L 0 122.04 Z" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 1031.54, 205.36)" opacity="1"><path fill="#FFFDF7" d="M 0 8.1 C 0 3.6265 24.9019 0 55.62 0 C 86.3381 0 111.24 3.6265 111.24 8.1 C 111.24 12.5735 86.3381 16.2 55.62 16.2 C 24.9019 16.2 0 12.5735 0 8.1"/><path stroke-width="2" d="M 0 8.1 C 0 3.6265 24.9019 0 55.62 0 C 86.3381 0 111.24 3.6265 111.24 8.1 C 111.24 12.5735 86.3381 16.2 55.62 16.2 C 24.9019 16.2 0 12.5735 0 8.1" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 960, 0)" opacity="1"><path stroke-width="2" d="M 80.72 110.32 L 80.72 197.8" transform="scale(1)" stroke="#CDD5CE" fill="none"/></g>
+  <g transform="matrix(1, 0, 0, 1, 960, 0)" opacity="1"><path stroke-width="2" d="M 173.6 110.32 L 173.6 197.8" transform="scale(1)" stroke="#CDD5CE" fill="none"/></g>
+  <g transform="matrix(0.8776, -0.4794, 0.4794, 0.8776, 1068.8, 155.68)" opacity="1"><path fill="#B8F23D" d="M 0 12.96 C 0 5.8024 11.1212 0 24.84 0 C 38.5588 0 49.68 5.8024 49.68 12.96 C 49.68 20.1176 38.5588 25.92 24.84 25.92 C 11.1212 25.92 0 20.1176 0 12.96"/><path stroke-width="2" d="M 0 12.96 C 0 5.8024 11.1212 0 24.84 0 C 38.5588 0 49.68 5.8024 49.68 12.96 C 49.68 20.1176 38.5588 25.92 24.84 25.92 C 11.1212 25.92 0 20.1176 0 12.96" fill="none" stroke="#99DD2F"/></g>
+  <g transform="matrix(1, 0, 0, 1, 960, 0)" opacity="1"><path stroke-width="2" d="M 113.12 163.24 L 142.28 148.12" transform="scale(1)" stroke="#285B45" fill="none"/></g>
+</g>
+</svg>

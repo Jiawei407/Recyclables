@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 256 256" stroke-linecap="round" stroke-linejoin="round">
+  <title>Reusable takeaway cup</title>
+  <!-- Original editable vector artwork, drawn and exported with tldraw. -->
+  <g transform="translate(-320 0)">
+  <g transform="matrix(1, 0, 0, 1, 369, 219)" opacity="0.07"><path fill="#10251D" d="M 0 4.5 C 0 2.0147 35.3695 0 79 0 C 122.6305 0 158 2.0147 158 4.5 C 158 6.9853 122.6305 9 79 9 C 35.3695 9 0 6.9853 0 4.5"/><path stroke-width="2" d="M 0 4.5 C 0 2.0147 35.3695 0 79 0 C 122.6305 0 158 2.0147 158 4.5 C 158 6.9853 122.6305 9 79 9 C 35.3695 9 0 6.9853 0 4.5" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 401, 97.9)" opacity="1"><path fill="#FFFDF7" d="M 0 0 L 93.79 0 L 93.79 116.39 L 0 116.39 Z"/><path stroke-width="2" d="M 0 0 L 93.79 0 L 93.79 116.39 L 0 116.39 Z" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 397.61, 87.73)" opacity="1"><path fill="#10251D" d="M 0 0 L 101.7 0 L 101.7 20.34 L 0 20.34 Z"/><path stroke-width="2" d="M 0 0 L 101.7 0 L 101.7 20.34 L 0 20.34 Z" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 404.39, 75.3)" opacity="1"><path fill="#285B45" d="M 0 9.605 C 0 4.3003 19.7308 0 44.07 0 C 68.4092 0 88.14 4.3003 88.14 9.605 C 88.14 14.9097 68.4092 19.21 44.07 19.21 C 19.7308 19.21 0 14.9097 0 9.605"/><path stroke-width="2" d="M 0 9.605 C 0 4.3003 19.7308 0 44.07 0 C 68.4092 0 88.14 4.3003 88.14 9.605 C 88.14 14.9097 68.4092 19.21 44.07 19.21 C 19.7308 19.21 0 14.9097 0 9.605" fill="none" stroke="#285B45"/></g>
+  <g transform="matrix(1, 0, 0, 1, 428.12, 74.17)" opacity="1"><path fill="#10251D" d="M 0 0 L 40.68 0 L 40.68 7.91 L 0 7.91 Z"/><path stroke-width="2" d="M 0 0 L 40.68 0 L 40.68 7.91 L 0 7.91 Z" fill="none" stroke="#10251D"/></g>
+  <g transform="matrix(1, 0, 0, 1, 414.56, 144.23)" opacity="1"><path fill="#285B45" d="M 0 0 L 66.67 0 L 66.67 38.42 L 0 38.42 Z"/><path stroke-width="2" d="M 0 0 L 66.67 0 L 66.67 38.42 L 0 38.42 Z" fill="none" stroke="#285B45"/></g>
+  <g transform="matrix(0.8776, -0.4794, 0.4794, 0.8776, 432.64, 160.05)" opacity="1"><path fill="#B8F23D" d="M 0 7.7292 C 0 3.4605 6.6326 0 14.8143 0 C 22.996 0 29.6286 3.4605 29.6286 7.7292 C 29.6286 11.9979 22.996 15.4584 14.8143 15.4584 C 6.6326 15.4584 0 11.9979 0 7.7292"/><path stroke-width="2" d="M 0 7.7292 C 0 3.4605 6.6326 0 14.8143 0 C 22.996 0 29.6286 3.4605 29.6286 7.7292 C 29.6286 11.9979 22.996 15.4584 14.8143 15.4584 C 6.6326 15.4584 0 11.9979 0 7.7292" fill="none" stroke="#99DD2F"/></g>
+  <g transform="matrix(1, 0, 0, 1, 320, 0)" opacity="1"><path stroke-width="2" d="M 115.2164 164.5587 L 132.6071 155.5413" transform="scale(1)" stroke="#285B45" fill="none"/></g>
+  <g transform="matrix(1, 0, 0, 1, 320, 0)" opacity="1"><path stroke-width="2" d="M 91.17 118.24 L 96.82 138.58" transform="scale(1)" stroke="#FFFDF7" fill="none"/></g>
+</g>
+</svg>
