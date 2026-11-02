@@ -3,6 +3,15 @@ use PHPUnit\Framework\TestCase;
 
 final class SqlNamespaceTest extends TestCase
 {
+    public function testStandaloneDemoIncludesTheCompleteCanonicalSchemaBeforeItsAccounts(): void
+    {
+        $folder=dirname(__DIR__,2).'/database/';
+        $schema=str_replace("\r",'',trim(file_get_contents($folder.'recyclables_db.sql')));
+        $demo=str_replace("\r",'',file_get_contents($folder.'demo_accounts.sql'));
+        self::assertStringContainsString($schema,$demo,'Keep the standalone installer synchronized with the canonical schema.');
+        self::assertLessThan(strpos($demo,'INSERT IGNORE INTO users'),strpos($demo,$schema));
+    }
+
     public function testSqlImportsAndDefaultConnectionUseTheDedicatedUiDatabase(): void
     {
         $previous=getenv('RECYCLABLES_DB_NAME');

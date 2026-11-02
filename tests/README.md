@@ -67,7 +67,7 @@ For Linux/macOS, use `php` in place of the XAMPP executable and export the same 
 
 ## SQL installation regression
 
-With MySQL running, set `RECYCLABLES_TEST_DB_NAME` to a new, unused `recyclables_test_*` prefix (at most 35 characters after the prefix), plus the test connection variables above, then run `php tests/check-sql-install.php`. It creates two disposable schemas, reproduces selection of an older users table without `university_id`, imports the current schema/demo accounts, checks all four role password hashes and repeat-import behavior, and verifies the legacy account/schema remain untouched. Only schemas successfully created by this invocation are removed. The application SQL and default connection now use `recyclables_ui_db`, separate from the old `recyclables_db` project.
+With MySQL running, set `RECYCLABLES_TEST_DB_NAME` to a new, unused `recyclables_test_*` prefix (at most 35 characters after the prefix), plus the test connection variables above, then run `php tests/check-sql-install.php`. It starts with an older users table without `university_id` and no UI database, imports only the standalone demo SQL, checks all four role password hashes and repeat-import behavior, and verifies the legacy account/schema remain untouched. It also exercises the CLI installer against another missing database using an explicit configuration override. Only schemas successfully created by this invocation are removed. The application SQL and default connection now use `recyclables_ui_db`, separate from the old `recyclables_db` project.
 
 ## JavaScript tests
 
