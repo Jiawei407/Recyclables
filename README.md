@@ -14,7 +14,7 @@ Role presentation is shared in `includes/role-presentation.php`, with scoped sty
 
 For the default upload allowance, set `upload_max_filesize=256M` and `post_max_size=300M` in XAMPP's php.ini, then restart Apache. The application validates up to 256 MiB and 256 megapixels by default; `RECYCLABLES_UPLOAD_MAX_BYTES` and `RECYCLABLES_UPLOAD_MAX_PIXELS` can configure lower or higher limits. These are operational defaults, not a measured maximum for every phone model. JPG, PNG and structurally validated HEIC/HEIF are supported; unsupported browser previews offer the original file for download. RAW/DNG is excluded. See `FEATURES-AND-LIMITS.md` for decoding limits.
 
-Database defaults are `127.0.0.1`, port `3306`, database `recyclables_db`, user `root`, empty password. If yours differs, edit `includes/config.php`. Use a new database for this version if an older Recyclables database already exists; its schema may differ. The supplied SQL intentionally does not drop or overwrite existing tables.
+Database defaults are `127.0.0.1`, port `3306`, database `recyclables_ui_db`, user `root`, empty password. If yours differs, edit `includes/config.php`. The older project uses `recyclables_db` with a different schema (`student_id` instead of `university_id` and different role values). This version uses `recyclables_ui_db` to keep that database intact. The supplied SQL intentionally does not drop or overwrite existing tables.
 
 The SQL creates the current schema; it is not a migration for an earlier backend. Change the database name in both SQL files and config.php when installing alongside an older database.
 
@@ -31,7 +31,7 @@ Every account now uses the revised APU identity policy.
 
 See TEST-ACCOUNTS.md for all accounts, including your existing registration tester and Engineering representative. Suspended accounts remain suspended.
 
-On the existing website the account revision is applied separately; do not re-import database/account_updates.sql after it has already been applied. Fresh installations import the main schema and demo_accounts.sql as usual.
+If a demo import reports #1054 for university_id, import database/recyclables_db.sql first, then database/demo_accounts.sql again. Both now target recyclables_ui_db. Do not rename a legacy student_id column or apply the account-only revision to the older schema.
 
 ## Try the main workflow
 
@@ -70,6 +70,6 @@ Then open `http://localhost:8000/`. MySQL must still be running. Use the supplie
 
 ## Installing this account revision
 
-Copy the Coding folder from the ZIP to C:\xampp\htdocs\Coding. The existing MySQL account update has already been applied; no SQL import is needed on this computer. Use the new credentials in TEST-ACCOUNTS.md. Old account emails and passwords have been replaced.
+Copy the Coding folder from the ZIP to C:\xampp\htdocs\Coding. Import database/recyclables_db.sql followed by database/demo_accounts.sql for the separate UI-version database. Use the new credentials in TEST-ACCOUNTS.md. Existing accounts in the older project are not changed.
 
-The ZIP includes the original upload files recovered from your saved project copies. Keep any additional storage/uploads files you have when merging folders. Do not delete the MySQL database or re-import its schema on this existing installation.
+The ZIP includes the original upload files recovered from your saved project copies. Keep any additional storage/uploads files you have when merging folders. Do not delete the older project database. Existing compatible installations can retain their database by setting RECYCLABLES_DB_NAME; update the SQL USE statements to match before importing.

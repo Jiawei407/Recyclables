@@ -15,7 +15,7 @@ try {
     $conn->query('CREATE DATABASE `' . $name . '` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
     $conn->select_db($name);
     $sql = file_get_contents(dirname(__DIR__) . '/database/recyclables_db.sql');
-    $sql = preg_replace('/^CREATE DATABASE[^;]*;\s*USE recyclables_db;\s*/m', '', $sql, 1, $removed);
+    $sql = preg_replace('/^CREATE DATABASE[^;]*;\s*USE recyclables_ui_db;\s*/m', '', $sql, 1, $removed);
     if ($removed !== 1) throw new RuntimeException('Schema header changed. Review the importer before running.');
     $conn->multi_query($sql);
     do {

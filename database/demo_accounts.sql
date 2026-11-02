@@ -1,5 +1,6 @@
+-- Import database/recyclables_db.sql first; this version uses recyclables_ui_db, separate from the older project.
 -- Valid local test accounts. See TEST-ACCOUNTS.md for role-specific passwords.
-USE recyclables_db;
+USE recyclables_ui_db;
 INSERT IGNORE INTO users (full_name,email,university_id,faculty,role,status,password,can_join,can_submit) VALUES ('Demo User','tp900001@mail.apu.edu.my','TP900001','School of Computing','user','active','$2y$10$WL4uOrJ8eti/PP8fZuNA.O3ZY9ODpM5IaWlsGVmmZ0iGV.uonqAUm','1','1');
 INSERT IGNORE INTO users (full_name,email,university_id,faculty,role,status,password,can_join,can_submit) VALUES ('Demo Faculty','faculty@mail.apu.edu.my','DEMOFACULTY','School of Computing','faculty','active','$2y$10$gHBXTzyzUwblB00OdTsnd.BlzVJMx2kGbYLrGS96KYDGV0.Y6.OLS','1','1');
 INSERT IGNORE INTO users (full_name,email,university_id,faculty,role,status,password,can_join,can_submit) VALUES ('Test Coordinator','coordinator@mail.apu.edu.my','DEMOCOORD','Campus Sustainability','coordinator','active','$2y$10$.vEDfjXTYClw9GS1XIfUU.fpXFDnn3M3RJSK5xfsNVFTroH03.wrC','1','1');

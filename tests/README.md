@@ -65,6 +65,10 @@ Integration fixtures roll back after every test. HTTP tests use committed fixtur
 
 For Linux/macOS, use `php` in place of the XAMPP executable and export the same environment variables.
 
+## SQL installation regression
+
+With MySQL running, set `RECYCLABLES_TEST_DB_NAME` to a new, unused `recyclables_test_*` prefix (at most 35 characters after the prefix), plus the test connection variables above, then run `php tests/check-sql-install.php`. It creates two disposable schemas, reproduces selection of an older users table without `university_id`, imports the current schema/demo accounts, checks all four role password hashes and repeat-import behavior, and verifies the legacy account/schema remain untouched. Only schemas successfully created by this invocation are removed. The application SQL and default connection now use `recyclables_ui_db`, separate from the old `recyclables_db` project.
+
 ## JavaScript tests
 
 ```powershell
