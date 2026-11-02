@@ -1,6 +1,6 @@
 # Recyclables tests
 
-Tests run against the real PHP functions, SQL queries, action handlers and JavaScript in this repository. No application behaviour has been changed.
+Tests run against the real PHP functions, SQL queries, action handlers and JavaScript in this repository, including the role layout and agreed account/activity rules.
 
 ## What is covered
 
@@ -39,7 +39,7 @@ Run the identity requirements as well:
 & C:\xampp\php\php.exe tools/phpunit-9.phar --testsuite Unit,Requirements
 ```
 
-This second command currently reports policy failures. See [RESULTS.md](RESULTS.md).
+The full agreed identity policy is included; run it without excluding requirements. [RESULTS.md](RESULTS.md) records the historical baseline, and [ROLE-LAYOUT-VERIFICATION.md](../ROLE-LAYOUT-VERIFICATION.md) records the current implementation results.
 
 ## Database and request tests
 
@@ -57,12 +57,7 @@ $env:RECYCLABLES_TEST_DB_PASSWORD = ''
 & C:\xampp\php\php.exe tests/run-http.php
 ```
 
-Both test suites include agreed-rule assertions that currently fail. To check the existing behaviour separately:
-
-```powershell
-& C:\xampp\php\php.exe tools/phpunit-9.phar --testsuite Unit,Integration --exclude-group requirements
-& C:\xampp\php\php.exe tests/run-http.php --exclude-group requirements
-```
+Both suites include the agreed-rule assertions. Do not exclude the `requirements` group for release checks.
 
 Integration fixtures roll back after every test. HTTP tests use committed fixtures so the server can read them, then delete them in dependency order. They require the setup script's marker table and a private server handshake before any fixture cleanup. Never point them at an existing application database. Do not run database/request suites concurrently against the same test database.
 
@@ -80,10 +75,10 @@ These execute the production scripts with small DOM event doubles. They do not c
 
 ## Remaining coverage
 
-- Real HEIC/HEIF decoding and orientation need representative valid fixtures and an implemented conversion path. The picker requirement is already tested and currently fails.
-- The final numerical upload cap is unresolved. Current tests enforce two clear lower bounds: a valid 48 MP PNG and a valid photo larger than 5 MB. They do not invent the maximum-plus-30-MB value.
+- HEIC/HEIF containers are validated and served privately; browsers that cannot decode them get a download link. Server decoding, orientation and conversion are not implemented.
+- Upload defaults are configurable (256 MiB and 256 megapixels). Tests cover valid 48 MP PNG and photos larger than 5 MB, malformed containers and configured bounds; they do not establish a hardware maximum for all phones.
 - Proposed environmental formulas are not implemented in the application; no substitute reporting implementation was added just to test it.
-- Real concurrent review races, failure injection during database commits, complete browser accessibility/visual checks, and Apache deployment protections need further integration/browser coverage.
-- Account deletion is tested without choosing whether linked evidence/history should be removed or anonymized; that policy still needs agreement.
+- Real concurrent review races, failure injection during database commits and Apache deployment protections need further coverage. The role-layout browser checks cover all 82 role routes at 320px/1440px, with axe checks on representative pages.
+- Account deletion tests verify private evidence/points/awards are purged while other accounts, shared records and nullable audit history remain. Test upload cleanup is limited to the owning disposable schema.
 
 Run the unit and JavaScript suites after code changes, database suites after query/schema changes, and the HTTP suite before releases. Do not exclude `requirements` when deciding whether the application meets the agreed rules.

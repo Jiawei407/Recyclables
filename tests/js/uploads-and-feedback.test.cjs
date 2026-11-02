@@ -16,6 +16,24 @@ function uploadFixture({ label = true, preview = true } = {}) {
   return { world, input, filename, picture };
 }
 
+test('a HEIC image without browser decoding retains a download fallback', () => {
+  const { input, picture } = uploadFixture();
+  input.files = [{ name: 'Phone.HEIC', type: '' }]; input.dispatch('change');
+  picture.children[0].onerror();
+  assert.equal(picture.children[0].tagName, 'a');
+  assert.equal(picture.children[0].href, 'blob:test-1');
+  assert.equal(picture.children[0].download, 'Phone.HEIC');
+});
+
+test('a replaced image cannot overwrite a newer preview after a late error', () => {
+  const { input, picture } = uploadFixture();
+  input.files = [{ name: 'first.heic', type: 'image/heic' }]; input.dispatch('change');
+  const previous = picture.children[0];
+  input.files = [{ name: 'second.png', type: 'image/png' }]; input.dispatch('change');
+  const current = picture.children[0]; previous.onerror();
+  assert.equal(picture.children[0], current);
+});
+
 test('selecting a photo displays its filename as plain text and creates a preview', () => {
   const { world, input, filename, picture } = uploadFixture();
   const file = { name: '<img onerror=alert(1)>.jpg', type: 'image/jpeg' };
@@ -57,6 +75,34 @@ test('clearing the native picker restores the filename prompt', () => {
   input.files = [];
   input.dispatch('change');
   assert.equal(filename.textContent, 'Choose file');
+});
+
+test('clearing a selected photo removes its preview and releases its URL', () => {
+  const { world, input, filename, picture } = uploadFixture();
+  input.files = [{ name: 'first.png', type: 'image/png' }];
+  input.dispatch('change');
+  const image = picture.children[0];
+  input.files = [];
+  input.dispatch('change');
+  assert.equal(filename.textContent, 'Choose file');
+  assert.equal(picture.children.length, 0);
+  assert.deepEqual(world.urls.revoked, ['blob:test-1']);
+  image.onerror();
+  assert.equal(picture.children.length, 0);
+});
+
+test('choosing PDF after a failed HEIC preview removes its old download link', () => {
+  const { world, input, filename, picture } = uploadFixture();
+  input.files = [{ name: 'Phone.HEIC', type: '' }];
+  input.dispatch('change');
+  picture.children[0].onerror();
+  assert.equal(picture.children[0].tagName, 'a');
+  input.files = [{ name: 'report.pdf', type: 'application/pdf' }];
+  input.dispatch('change');
+  assert.equal(filename.textContent, 'report.pdf');
+  assert.equal(picture.children.length, 0);
+  assert.deepEqual(world.urls.revoked, ['blob:test-1']);
+  assert.equal(world.urls.created.length, 1);
 });
 
 test('a PDF filename is shown without pretending it is an image preview', () => {

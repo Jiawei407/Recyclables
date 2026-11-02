@@ -19,6 +19,13 @@ function filterFixture(records, { search = true, select = true } = {}) {
   return { toolbar, input, dropdown };
 }
 
+test('mobile column labels are not searchable record data', () => {
+  const row = new Element({ textContent: 'Status Alice active', dataset: { filterText: 'Alice active' } });
+  const { input, toolbar } = filterFixture([row]);
+  input.value = 'status'; toolbar.dispatch('input'); assert.equal(row.hidden, true);
+  input.value = 'Alice'; toolbar.dispatch('input'); assert.equal(row.hidden, false);
+});
+
 test('search is case-insensitive and clearing it restores hidden records', () => {
   const bottle = new Element({ textContent: 'Recycle Plastic Bottles' });
   const cleanup = new Element({ textContent: 'Campus Cleanup' });

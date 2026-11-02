@@ -16,8 +16,8 @@ function account_error($name, $email, $university_id, $faculty, $password, $conf
     if (trim($name) === '' || strlen($name) > 100) return 'Enter a full name of up to 100 characters.';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254) return 'Enter a valid email address.';
     if (trim($university_id) === '' || strlen($university_id) > 20) return 'Enter a university ID of up to 20 characters.';
-    if ($role === 'user' && !str_ends_with(strtolower($email), '@mail.apu.edu.my')) return 'Student emails must end with @mail.apu.edu.my.';
-    if ($role === 'user' && !preg_match('/^TP[0-9]{6}$/D', $university_id)) return 'Student IDs must be TP followed by six digits, for example TP090526.';
+    if (!str_ends_with(strtolower($email), '@mail.apu.edu.my')) return $role === 'user' ? 'Student emails must end with @mail.apu.edu.my.' : 'University emails must end with @mail.apu.edu.my.';
+    if ($role === 'user' && !preg_match('/^TP[0-9]{6}$/iD', $university_id)) return 'Student IDs must be TP followed by six digits, for example TP090526.';
     if (!in_array($faculty, faculties(), true)) return 'Choose a faculty.';
     if ($needs_password || $password !== '') {
         $problem = new_password_error($password);

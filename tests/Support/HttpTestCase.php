@@ -52,12 +52,22 @@ abstract class HttpTestCase extends TestCase
     protected function tearDown(): void
     {
         if ($this->connection && $this->cleanupEnabled) {
+            // Capture only files referenced by this marked disposable schema. A browser or
+            // another test schema can legitimately create uploads in the same checkout.
+            $fixtureUploads = [];
+            foreach (['submissions' => 'photo', 'faculty_reports' => 'attachment', 'challenges' => 'image', 'achievements' => 'image'] as $table => $column) {
+                $result = $this->connection->query('SELECT `' . $column . '` AS filename FROM `' . $table . '`');
+                while ($row = $result->fetch_assoc()) $fixtureUploads[] = $row['filename'];
+            }
             $this->clearFixtures();
             $this->connection->close();
             $GLOBALS['conn'] = $this->previousConnection;
-            // Only remove new upload files produced inside this test checkout.
-            foreach (array_diff(glob(dirname(__DIR__, 2) . '/storage/uploads/*') ?: [], $this->originalFiles) as $file) {
-                if (preg_match('/^[a-f0-9]{32}\.(jpg|png|pdf|heic|heif)$/D', basename($file)) && is_file($file)) unlink($file);
+            // Never remove an upload belonging only to a different schema/process.
+            foreach (array_unique($fixtureUploads) as $name) {
+                if (!is_string($name) || !preg_match('/^[a-f0-9]{32}\.(jpg|png|pdf|heic|heif)$/D', $name)) continue;
+                $file = dirname(__DIR__, 2) . '/storage/uploads/' . $name;
+                if (in_array($file, $this->originalFiles, true)) continue;
+                if (is_file($file)) unlink($file);
             }
         }
         if ($this->cookie && is_file($this->cookie)) unlink($this->cookie);

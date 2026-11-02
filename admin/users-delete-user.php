@@ -249,7 +249,7 @@ require __DIR__ . '/../includes/metrics.php';
             </div>
           </div>
         </div>
-      <form id="backend-form" method="post" enctype="multipart/form-data" hidden="" data-confirm="Confirm this change?"><?php echo csrf_field(); ?><input type="hidden" name="action" value="delete-user" form="backend-form"><input type="hidden" name="id" value="<?php echo (int)$id; ?>" form="backend-form"></form></section>
+      <form id="backend-form" method="post" enctype="multipart/form-data" hidden="" data-confirm="Permanently delete this account and its private challenge activity, evidence and points? This cannot be undone."><?php echo csrf_field(); ?><input type="hidden" name="action" value="delete-user" form="backend-form"><input type="hidden" name="id" value="<?php echo (int)$id; ?>" form="backend-form"></form></section>
     </div>
   <script src="../scripts/app.js" defer></script></body>
 </html>

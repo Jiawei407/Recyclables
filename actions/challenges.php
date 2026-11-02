@@ -82,9 +82,10 @@ if ($action === 'review') {
     $submission = one('SELECT * FROM submissions WHERE id=? FOR UPDATE',[$id]);
     need($submission, 'Select an existing submission.');
     need(can_review($submission['status'],$decision), 'This submission is currently ' . str_replace('-', ' ', $submission['status']) . '. Only pending evidence can receive a new decision. Ask the participant to submit new evidence for another review.');
-    need($notes !== '' || $decision === 'approved', 'Give a reason for rejection or revision.');
     if ($decision === 'approved') {
         need(isset($_POST['review-matches'],$_POST['review-count'],$_POST['review-duplicate']), 'Complete all three reviewer checks before approving.');
+        // Serialize this account before any nonlocking read establishes the transaction snapshot.
+        one('SELECT id FROM users WHERE id=? FOR UPDATE',[$submission['user_id']]);
     }
     $challenge = one('SELECT * FROM challenges WHERE id=?',[$submission['challenge_id']]);
     $points = $decision === 'approved' ? (int)$challenge['points'] : 0;
@@ -93,8 +94,10 @@ if ($action === 'review') {
         query('INSERT INTO point_transactions (user_id,submission_id,points,reason,actor_id) VALUES (?,?,?,?,?)',[$submission['user_id'],$id,$points,'Approved: ' . $challenge['title'],$user['id']]);
     }
     if ($decision === 'approved') {
-        // Serialize campaign rewards for this account across different reviews.
-        one('SELECT id FROM users WHERE id=? FOR UPDATE',[$submission['user_id']]);
+        // Persist qualification at approval time, before later rule changes or repeat activity.
+        foreach (rows("SELECT id FROM achievements WHERE status='active'") as $badge) {
+            achievement_progress($badge['id'],$submission['user_id']);
+        }
         $campaigns=rows('SELECT ca.* FROM campaigns ca JOIN campaign_challenges cc ON cc.campaign_id=ca.id WHERE cc.challenge_id=? AND DATE(?) BETWEEN ca.start_date AND ca.end_date',[$submission['challenge_id'],$submission['created_at']]);
         foreach ($campaigns as $campaign) {
             $missing=one("SELECT COUNT(*) AS total FROM campaign_challenges cc WHERE cc.campaign_id=? AND NOT EXISTS(SELECT 1 FROM submissions s WHERE s.challenge_id=cc.challenge_id AND s.user_id=? AND s.status='approved' AND DATE(s.created_at) BETWEEN ? AND ?)",[$campaign['id'],$submission['user_id'],$campaign['start_date'],$campaign['end_date']]);

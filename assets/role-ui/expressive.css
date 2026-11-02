@@ -1,0 +1,120 @@
+/* Poster composition on lighter role screens. Original information groups stay in order. */
+.workspace-page body.intensity-expressive .workspace-content{padding-top:40px}
+.workspace-page body.intensity-expressive .poster-intro{display:block;margin:0 0 40px;padding:16px 0 0;border:0;max-width:none}
+.workspace-page body.intensity-expressive .poster-intro>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.48fr);column-gap:48px;align-items:end}
+.workspace-page body.intensity-expressive .poster-intro h1{grid-column:1;grid-row:1/3;font:650 clamp(64px,7.5vw,96px)/.96 'Albert Sans',Arial,sans-serif;letter-spacing:-.04em;max-width:100%;margin:0;overflow-wrap:normal;text-wrap:balance}
+.workspace-page body.intensity-expressive .poster-intro .context-line{grid-column:2;grid-row:1;align-self:end;color:#102d1d;font-size:15px;font-weight:600;margin:0 0 6px}
+.workspace-page body.intensity-expressive .poster-intro .page-description{grid-column:2;grid-row:2;align-self:start;color:#4c6253;font-size:16px;line-height:1.45;margin:0;max-width:42ch}
+.workspace-page body.intensity-expressive .poster-intro .poster-photo{width:100%;margin:4px 0 0;padding:0}
+.workspace-page body.intensity-expressive .poster-intro .poster-photo img{width:100%;height:160px;display:block;object-fit:cover;filter:saturate(.78);object-position:center 42%}
+.workspace-page body.intensity-expressive .workspace-content>.stack{gap:40px}
+.workspace-page body.intensity-expressive .page-tabs{display:flex;flex-wrap:wrap;gap:4px 28px;overflow:visible;white-space:normal;margin:0 0 28px;border-bottom:1px solid #afbdaf}
+.workspace-page body.intensity-expressive .page-tabs a{padding:12px 0;min-height:48px;white-space:normal}
+.workspace-page body.intensity-expressive .page-tabs .is-active{border-color:#365e43}
+.workspace-page body.intensity-expressive .workspace-content>.stack>.page-tabs{margin-bottom:0}
+.workspace-page body.intensity-expressive .panel{padding:24px 0 0}
+.workspace-page body.intensity-expressive .panel-heading{margin-bottom:24px}
+.workspace-page body.intensity-expressive .panel>h2,.workspace-page body.intensity-expressive .panel-heading h2{font:500 32px/1.12 'Albert Sans',Arial,sans-serif;letter-spacing:-.025em;max-width:28ch}
+.workspace-page body.intensity-expressive .panel p{max-width:70ch}
+.workspace-page body.intensity-expressive .grid-2{column-gap:48px;row-gap:32px}
+.workspace-page body.intensity-expressive .metric{padding:18px 0 0}
+.workspace-page body.intensity-expressive .metric-value{font-size:44px;line-height:1.05;margin:12px 0 8px}
+.workspace-page body.intensity-expressive .metric-label{font-size:14px}
+.workspace-page body.intensity-expressive .metric-note{margin-bottom:0}
+.workspace-page body.intensity-expressive .announcement-banner{padding:28px 32px}
+.workspace-page body.intensity-expressive .announcement-banner .panel{padding:0;border:0}
+.workspace-page body.intensity-expressive .announcement-banner .panel-heading{margin-bottom:12px}
+.workspace-page body.intensity-expressive .announcement-banner h2{color:#f3f5ef}
+.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro .poster-photo{width:72%;margin-left:0;margin-top:4px}
+.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro .poster-photo img{height:176px;object-position:center 49%}
+.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro{margin-bottom:32px}
+.workspace-page body.role-user.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2{grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr)}
+.workspace-page body.role-faculty.intensity-expressive.layout-dashboard .poster-intro .poster-photo img{height:176px;object-position:center 38%}
+.workspace-page body.role-faculty.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2{grid-template-columns:minmax(0,1.3fr) minmax(0,.85fr)}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .poster-intro{margin-bottom:32px}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:transparent;color:#102d1d;padding:28px 0 0;gap:48px;border-top:1px solid #738674}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest p,.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest .context-line{color:#4c6253}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest .button--primary{background:#173f2a;color:#f3f5ef;border-color:#173f2a}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest .button--primary:hover{background:#365e43}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest>.stack{gap:16px;align-self:center}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard #program-title{font-size:44px;line-height:1.02;font-weight:500;letter-spacing:-.03em}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .media-figure{margin:0}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .media-figure img{height:240px;width:100%;object-fit:cover;filter:saturate(.8)}
+.workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2{grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr)}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .poster-intro{padding-block:24px;margin-bottom:28px}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .status-banner{padding:28px 32px;background:#e4eadf;color:#102d1d;gap:24px}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .status-banner h2{font:500 34px/1.1 'Albert Sans',Arial,sans-serif;letter-spacing:-.025em}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .status-banner p{color:#4c6253}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .metric-grid{gap:24px}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2{grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr)}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .panel--sage{background:transparent}
+.workspace-page body.role-admin.intensity-expressive.layout-dashboard .display-number{font-size:48px}
+.workspace-page body.expressive-profile .poster-intro{margin-bottom:32px}
+.workspace-page body.role-user.expressive-profile .poster-intro .poster-photo{width:100%;margin-left:0}
+.workspace-page body.role-user.expressive-profile .poster-intro .poster-photo img{height:128px;object-position:center 38%}
+.workspace-page body.expressive-profile .form-grid{column-gap:32px;row-gap:24px;max-width:940px}
+.workspace-page body.expressive-profile .form-actions{margin-top:8px;gap:12px}
+.workspace-page body.expressive-profile .panel .button{margin-top:12px}
+.workspace-page body.expressive-profile .form-actions .button{margin-top:0}
+.workspace-page body.expressive-profile .field label{font-size:16px;margin-bottom:8px}
+.workspace-page body.expressive-profile .workspace-content input,.workspace-page body.expressive-profile .workspace-content select{background-color:#f8faf5;min-height:52px}
+.workspace-page body.expressive-profile .workspace-content>.stack>.page-tabs+.panel{border-top:0;padding-top:0}
+.workspace-page body.expressive-profile .profile-summary{display:flex;align-items:center;gap:24px;padding:8px 0 32px;border:0}
+.workspace-page body.expressive-profile .profile-summary h2{font:500 44px/1.1 'Albert Sans',Arial,sans-serif;letter-spacing:-.025em}
+.workspace-page body.expressive-profile .profile-summary p{margin-top:6px}
+.workspace-page body.expressive-profile .avatar{border-radius:0;background:#e4eadf;color:#365e43;flex-shrink:0;width:72px;height:88px}
+.workspace-page body.expressive-profile .detail-list{max-width:960px}
+.workspace-page body.expressive-profile .detail-list>div{padding-block:18px;border-bottom:1px solid #afbdaf}
+.workspace-page body.role-coordinator.expressive-profile .poster-intro h1{font-size:clamp(52px,6vw,80px);max-width:14ch}
+.workspace-page body.role-coordinator.expressive-profile .poster-intro .poster-photo{width:56%;margin:4px 0 0}
+.workspace-page body.role-coordinator.expressive-profile .poster-intro .poster-photo img{height:96px;object-position:center 40%}
+.workspace-page body.role-coordinator.expressive-profile .workspace-content>.grid-2{grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);gap:48px;align-items:start}
+.workspace-page body.role-coordinator.expressive-profile #account-summary{background:#e4eadf;color:#102d1d;padding:28px;border:0;gap:24px}
+.workspace-page body.role-coordinator.expressive-profile #account-summary h2{font-size:36px;line-height:1.05}
+.workspace-page body.role-coordinator.expressive-profile #account-summary p,.workspace-page body.role-coordinator.expressive-profile #account-summary dt{color:#4c6253}
+.workspace-page body.role-coordinator.expressive-profile #account-summary dd{color:#102d1d}
+.workspace-page body.role-coordinator.expressive-profile #account-summary .detail-list>div{grid-template-columns:1fr;padding-block:12px;gap:4px}
+.workspace-page body.role-coordinator.expressive-profile .workspace-content>.panel[role=form]{max-width:940px;gap:24px}
+@media(max-width:1100px){
+ .workspace-page body.intensity-expressive .poster-intro>div{column-gap:32px;grid-template-columns:minmax(0,1fr) minmax(200px,.65fr)}
+ .workspace-page body.intensity-expressive .grid-2{column-gap:32px}
+ .workspace-page body.role-coordinator.expressive-profile .workspace-content>.grid-2{gap:32px;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr)}
+ .workspace-page body.role-coordinator.expressive-profile .form-grid{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+ .workspace-page body.role-coordinator.expressive-profile .workspace-content>.grid-2{grid-template-columns:1fr}
+ .workspace-page body.role-coordinator.expressive-profile .form-grid{grid-template-columns:1fr 1fr}
+ .workspace-page body.role-coordinator.expressive-profile #account-summary{max-width:940px}
+ .workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ .workspace-page body.intensity-expressive .workspace-content{padding-top:28px}
+ .workspace-page body.intensity-expressive .poster-intro{padding-top:12px;margin-bottom:28px}
+ .workspace-page body.intensity-expressive .poster-intro>div{display:block}
+ .workspace-page body.intensity-expressive .poster-intro h1{font-size:clamp(56px,13vw,80px);line-height:.98;letter-spacing:-.035em;max-width:100%;overflow-wrap:anywhere}
+ .workspace-page body.intensity-expressive .poster-intro .context-line{font-size:14px;margin:20px 0 4px}
+ .workspace-page body.intensity-expressive .poster-intro .page-description{font-size:16px;max-width:38ch}
+ .workspace-page body.intensity-expressive .poster-intro .poster-photo,.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro .poster-photo,.workspace-page body.role-user.expressive-profile .poster-intro .poster-photo,.workspace-page body.role-coordinator.expressive-profile .poster-intro .poster-photo{width:100%;margin:20px 0 0}
+ .workspace-page body.intensity-expressive .poster-intro .poster-photo img,.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro .poster-photo img,.workspace-page body.role-faculty.intensity-expressive.layout-dashboard .poster-intro .poster-photo img,.workspace-page body.role-user.expressive-profile .poster-intro .poster-photo img,.workspace-page body.role-coordinator.expressive-profile .poster-intro .poster-photo img{height:112px;width:100%}
+ .workspace-page body.intensity-expressive .workspace-content>.stack{gap:28px}
+ .workspace-page body.intensity-expressive .grid-2,.workspace-page body.role-user.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2,.workspace-page body.role-faculty.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2,.workspace-page body.role-admin.intensity-expressive.layout-dashboard .workspace-content>.stack>.grid-2{grid-template-columns:1fr;gap:28px}
+ .workspace-page body.intensity-expressive .panel>h2,.workspace-page body.intensity-expressive .panel-heading h2{font-size:28px}
+ .workspace-page body.intensity-expressive .announcement-banner{padding:24px}
+ .workspace-page body.intensity-expressive .metric-value{font-size:32px}
+ .workspace-page body.intensity-expressive .metric-label,.workspace-page body.intensity-expressive .metric-note{font-size:13px}
+ .workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .panel--forest{grid-template-columns:1fr;gap:24px}
+ .workspace-page body.role-coordinator.intensity-expressive.layout-dashboard #program-title{font-size:36px}
+ .workspace-page body.role-coordinator.intensity-expressive.layout-dashboard .media-figure img{height:160px}
+ .workspace-page body.role-admin.intensity-expressive.layout-dashboard .poster-intro{padding-block:12px}
+ .workspace-page body.role-admin.intensity-expressive.layout-dashboard .status-banner{padding:24px;display:flex;flex-direction:column;align-items:start}
+ .workspace-page body.role-admin.intensity-expressive.layout-dashboard .status-banner h2{font-size:30px}
+ .workspace-page body.role-admin.intensity-expressive.layout-dashboard .metric-grid{grid-template-columns:1fr 1fr;gap:24px 16px}
+ .workspace-page body.intensity-expressive .page-tabs{gap:4px 20px;margin-bottom:28px}
+ .workspace-page body.expressive-profile .form-grid,.workspace-page body.role-coordinator.expressive-profile .form-grid{grid-template-columns:1fr;gap:24px}
+ .workspace-page body.expressive-profile .profile-summary{align-items:start;gap:16px}
+ .workspace-page body.expressive-profile .profile-summary h2{font-size:32px}
+ .workspace-page body.expressive-profile .avatar{width:48px;height:64px}
+ .workspace-page body.role-coordinator.expressive-profile .poster-intro h1{font-size:48px;line-height:1.02;max-width:14ch}
+ .workspace-page body.role-coordinator.expressive-profile #account-summary{padding:24px}
+ .workspace-page body.role-coordinator.expressive-profile #account-summary h2{font-size:32px}
+}

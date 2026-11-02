@@ -77,6 +77,13 @@ test('dialog initially focuses its first control', () => {
   assert.equal(world.document.activeElement, first);
 });
 
+test('hidden CSRF and disabled fields cannot become the modal focus boundary', () => {
+  const { dialog, first, last, world } = dialogFixture();
+  dialog.selectors.set('a[href],button,input,select,textarea', [new Element({type:'hidden'}),first,last,new Element({disabled:true})]);
+  last.focus();dialog.dispatch('keydown',{key:'Tab',shiftKey:false});assert.equal(world.document.activeElement,first);
+  first.focus();dialog.dispatch('keydown',{key:'Tab',shiftKey:true});assert.equal(world.document.activeElement,last);
+});
+
 test('Tab on the final control wraps to the first and prevents focus escaping', () => {
   const { world, dialog, first, last } = dialogFixture();
   last.focus();

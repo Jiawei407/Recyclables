@@ -1,0 +1,15 @@
+/* Student home follows the faculty home's single photographic opening and open information rows. */
+.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro .poster-photo{width:100%;margin-left:0}
+.workspace-page body.role-user.intensity-expressive.layout-dashboard .poster-intro .poster-photo img{object-position:center 42%;filter:saturate(.72)}
+.workspace-page body.role-user.layout-dashboard .workspace-content>.stack{gap:28px}
+.workspace-page body.role-user.layout-dashboard .announcement-banner{display:grid;grid-template-columns:minmax(160px,.38fr) minmax(0,1fr);gap:32px;background:transparent;color:#102d1d;border-top:1px solid #afbdaf;padding:24px 0 0}
+.workspace-page body.role-user.layout-dashboard .announcement-banner .panel-heading{margin:0}
+.workspace-page body.role-user.layout-dashboard .announcement-banner h2{color:#102d1d;font-size:24px}
+.workspace-page body.role-user.layout-dashboard .announcement-banner article.panel{padding:0;gap:4px}
+.workspace-page body.role-user.layout-dashboard .announcement-banner h3{font:500 20px/1.25 'Albert Sans',Arial,sans-serif;color:#102d1d;margin:0 0 4px}
+.workspace-page body.role-user.layout-dashboard .announcement-banner p{color:#4c6253;margin:0}
+.workspace-page body.role-user.layout-dashboard .announcement-banner p.muted{font-size:13px;margin-top:4px}
+@media(max-width:760px){
+ .workspace-page body.role-user.layout-dashboard .announcement-banner{grid-template-columns:1fr;gap:16px;padding-top:20px}
+ .workspace-page body.role-user.layout-dashboard .announcement-banner h2{font-size:22px}
+}

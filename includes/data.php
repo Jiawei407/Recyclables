@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/achievement-progress.php';
 // Read the selected record; never silently edit the first record in a table.
 $id = isset($_GET['id']) && is_scalar($_GET['id']) ? max(0,(int)$_GET['id']) : 0;
 $record = [];
@@ -45,7 +46,7 @@ function selected($field, $column, $option, $default = '') {
 function page_records($kind) {
     global $user,$role,$uid,$faculty,$section,$record;
     if ($kind === 'users') return rows('SELECT u.*,COALESCE((SELECT SUM(p.points) FROM point_transactions p WHERE p.user_id=u.id),0) AS points FROM users u ORDER BY u.full_name');
-    if ($kind === 'rankings') return rows("SELECT u.id,u.full_name,u.faculty,COALESCE(SUM(p.points),0) AS points FROM users u LEFT JOIN point_transactions p ON p.user_id=u.id WHERE u.role='user' AND u.status='active' GROUP BY u.id ORDER BY points DESC,u.full_name,u.id");
+    if ($kind === 'rankings') return rows("SELECT u.id,u.full_name,u.faculty,COALESCE(SUM(p.points),0) AS points FROM users u LEFT JOIN point_transactions p ON p.user_id=u.id WHERE u.role='user' AND u.status='active' GROUP BY u.id ORDER BY points DESC,u.created_at,u.id");
     if ($kind === 'faculty-rankings') return rows("SELECT u.faculty,COALESCE(SUM(p.points),0) AS points FROM users u LEFT JOIN point_transactions p ON p.user_id=u.id WHERE u.role='user' AND u.status='active' GROUP BY u.faculty ORDER BY points DESC,u.faculty");
     if ($kind === 'challenges') {
         $where = ''; $params=[];
@@ -89,26 +90,10 @@ function page_records($kind) {
         $params=$role === 'faculty' ? [$faculty] : ($role === 'user' ? [$uid] : []);
         return rows("SELECT DATE_FORMAT(s.created_at,'%Y-%m') AS period,COUNT(*) AS actions FROM submissions s JOIN users u ON u.id=s.user_id WHERE s.status='approved'" . $scope . ' GROUP BY period ORDER BY period DESC',$params);
     }
-    if ($kind === 'participants-by-month') return rows("SELECT DATE_FORMAT(joined_at,'%Y-%m') AS period,COUNT(DISTINCT user_id) AS participants FROM user_challenges GROUP BY period ORDER BY period DESC");
+    if ($kind === 'participants-by-month') {
+        $scope=$role === 'faculty' ? ' AND u.faculty=?' : ($role === 'user' ? ' AND u.id=?' : '');
+        $params=$role === 'faculty' ? [$faculty] : ($role === 'user' ? [$uid] : []);
+        return rows("SELECT DATE_FORMAT(uc.joined_at,'%Y-%m') AS period,COUNT(DISTINCT uc.user_id) AS participants FROM user_challenges uc JOIN users u ON u.id=uc.user_id WHERE u.role='user' AND u.status='active'" . $scope . ' GROUP BY period ORDER BY period DESC',$params);
+    }
     return [];
 }
-function achievement_progress($achievement_id, $user_id, $faculty_name = null) {
-    $rules = rows('SELECT * FROM achievement_rules WHERE achievement_id=?',[$achievement_id]);
-    $earned = count($rules)>0;
-    foreach ($rules as &$rule) {
-        $item = $rule['item'] === 'Approved activity' ? '' : $rule['item'];
-        $measure = in_array($rule['item'],['Plastic bottles','Reusable cup'],true) ? 'COALESCE(SUM(s.quantity),0)' : 'COUNT(*)';
-        $join = $faculty_name === null ? '' : ' JOIN users u ON u.id=s.user_id';
-        $scope = $faculty_name === null ? 's.user_id=?' : "u.faculty=? AND u.role='user'";
-        $sql="SELECT " . $measure . " AS total FROM submissions s JOIN challenges c ON c.id=s.challenge_id" . $join . " WHERE " . $scope . " AND s.status='approved'";
-        $params=[$faculty_name ?? $user_id];
-        if ($item !== '') { $sql.=' AND c.tracked_item=?'; $params[]=$item; }
-        $rule['progress']=(int)one($sql,$params)['total'];
-        $met=$rule['condition_name'] === 'Exactly' ? $rule['progress'] === (int)$rule['required_count'] : $rule['progress'] >= (int)$rule['required_count'];
-        $earned=$earned && $met;
-    }
-    // An individual campaign award does not award a collective faculty target.
-    $campaign_badge=$faculty_name === null ? one('SELECT * FROM user_achievements WHERE user_id=? AND achievement_id=?',[$user_id,$achievement_id]) : null;
-    return ['earned'=>$earned || (bool)$campaign_badge,'rules'=>$rules];
-}
-// Bottles and cups use the quantity checked by the human reviewer.

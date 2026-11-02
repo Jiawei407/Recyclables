@@ -5,6 +5,7 @@ if ($action === 'save-user') {
     $editing = $id > 0;
     $name = post('full-name'); $email = strtolower(post('email')); $university_id = post('university-id');
     $faculty = post('faculty'); $role = post('designated-role'); $status = strtolower(post('account-status','active'));
+    if ($role === 'user') $university_id = strtoupper($university_id);
     $password = raw_password('new-password'); $confirm = raw_password('confirm-password');
     $problem = account_error($name,$email,$university_id,$faculty,$password,$confirm,!$id,$role);
     need($problem === '',$problem);
@@ -28,13 +29,26 @@ if (in_array($action,['delete-user','suspend-user'],true)) {
     require_role('admin'); $id = (int)post('id');
     need($id && $id !== (int)$user['id'], 'You cannot delete or suspend your own account.');
     need(one('SELECT id FROM users WHERE id=?',[$id]), 'Select a user.');
+    $deleted_photos = [];
     mysqli_begin_transaction($conn);
     if ($action === 'delete-user') {
-        need(!one('SELECT id FROM submissions WHERE user_id=? LIMIT 1',[$id]) && !one('SELECT id FROM point_transactions WHERE user_id=? LIMIT 1',[$id]), 'This user has evidence or points. Suspend the account to preserve the records.');
+        // Purge only this account's private participation data; shared records keep their nullable author references.
+        one('SELECT id FROM users WHERE id=? FOR UPDATE',[$id]);
+        $deleted_photos = array_column(rows('SELECT photo FROM submissions WHERE user_id=?',[$id]), 'photo');
+        query('DELETE FROM point_transactions WHERE user_id=?',[$id]);
+        query('DELETE FROM submissions WHERE user_id=?',[$id]);
+        query('DELETE FROM campaign_awards WHERE user_id=?',[$id]);
+        query('DELETE FROM user_achievements WHERE user_id=?',[$id]);
         query('DELETE FROM users WHERE id=?',[$id]);
     } else { query("UPDATE users SET status='suspended' WHERE id=?",[$id]); }
     audit($action,'User #' . $id);
     mysqli_commit($conn);
+    foreach ($deleted_photos as $photo) {
+        if (preg_match('/^[a-f0-9]{32}\.(jpg|png|heic|heif)$/D', $photo)) {
+            $path = __DIR__ . '/../storage/uploads/' . $photo;
+            if (is_file($path) && !unlink($path)) error_log('Could not remove deleted account evidence file: ' . $photo);
+        }
+    }
     action_success('Account', $action === 'delete-user' ? 'deleted' : 'suspended', 'admin/users-users.php');
 }
 if ($action === 'correct-points') {
@@ -74,6 +88,13 @@ if ($action === 'save-achievement') {
     }
     need($status !== 'active' || count($rules)>0, 'An active achievement needs at least one requirement.');
     $image = save_upload('image') ?: ($old['image'] ?? '');
+    if ($old && $old['status'] === 'active') {
+        // Preserve already-qualified legacy participants before replacing the old rules.
+        // These awards remain valid independently of whether the subsequent edit succeeds.
+        foreach (rows("SELECT id FROM users WHERE role='user' ORDER BY id") as $participant) {
+            achievement_progress($id,$participant['id']);
+        }
+    }
     mysqli_begin_transaction($conn);
     if ($id) { query('UPDATE achievements SET name=?,status=?,image=? WHERE id=?',[$name,$status,$image,$id]); }
     else { query('INSERT INTO achievements (name,status,image) VALUES (?,?,?)',[$name,$status,$image]); $id = mysqli_insert_id($conn); }
