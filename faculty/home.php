@@ -109,8 +109,8 @@ require __DIR__ . '/../includes/metrics.php';
                 <path d="m4 21 11-11"></path>
               </svg>
             </div>
-            <p class="metric-value"><?php echo e(metric('Faculty Green Points  No activity recorded yet.')); ?></p>
-            <p class="metric-note">No activity recorded yet.</p>
+            <p class="metric-value"><?php echo e(metric('Faculty Green Points')); ?></p>
+            <p class="metric-note">Approved activity.</p>
           </article>
           <article class="metric">
             <div class="metric-label">
@@ -120,8 +120,8 @@ require __DIR__ . '/../includes/metrics.php';
                 <path d="m4 21 11-11"></path>
               </svg>
             </div>
-            <p class="metric-value"><?php echo e(metric('Active participants  No activity recorded yet.')); ?></p>
-            <p class="metric-note">No activity recorded yet.</p>
+            <p class="metric-value"><?php echo e(metric('Active participants')); ?></p>
+            <p class="metric-note">Joined a challenge.</p>
           </article>
           <article class="metric">
             <div class="metric-label">
@@ -131,8 +131,8 @@ require __DIR__ . '/../includes/metrics.php';
                 <path d="m4 21 11-11"></path>
               </svg>
             </div>
-            <p class="metric-value"><?php echo e(metric('Participation rate  No activity recorded yet.')); ?></p>
-            <p class="metric-note">No activity recorded yet.</p>
+            <p class="metric-value"><?php echo e(metric('Participation rate')); ?></p>
+            <p class="metric-note">Of active participants.</p>
           </article>
         </div>
         <div class="grid-2">
@@ -177,10 +177,17 @@ require __DIR__ . '/../includes/metrics.php';
           <div class="panel-heading">
             <h2>Faculty participation over time</h2>
           </div>
-          <p>Monthly active participants</p>
-          <div class="bar-chart">
-            <p class="muted">No participation data is available yet.</p>
+          <p>Active participants who joined challenges each month.</p>
+          <?php $participation=page_records('participants-by-month'); ?>
+          <?php if ($participation): ?>
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="visually-hidden">Monthly faculty challenge participation</caption>
+              <thead><tr><th scope="col">Month</th><th scope="col">Participants</th></tr></thead>
+              <tbody><?php foreach ($participation as $month): ?><tr data-record><td><?= e($month['period']) ?></td><td><?= (int)$month['participants'] ?></td></tr><?php endforeach; ?></tbody>
+            </table>
           </div>
+          <?php else: ?><p class="muted">No participation data is available yet.</p><?php endif; ?>
         </section>
       </div>
     </main>

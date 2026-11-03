@@ -61,12 +61,12 @@ require __DIR__ . '/includes/metrics.php';
             </div>
             <div class="field">
               <label for="student-id">Student ID</label>
-              <input title="TP followed by six digits, for example TP090526." pattern="TP[0-9]{6}" id="student-id" type="text" required aria-describedby="student-id-error" placeholder="TP090526" maxlength="8" form="backend-form" name="student-id">
+              <input title="TP followed by six digits, for example TP090526." pattern="[Tt][Pp][0-9]{6}" id="student-id" type="text" required aria-describedby="student-id-error" placeholder="TP090526" maxlength="8" form="backend-form" name="student-id">
               <p class="field-error" id="student-id-error">Enter TP followed by six digits, for example TP090526.</p>
             </div>
             <div class="field">
               <label for="email">University email</label>
-              <input title="Student emails must end with @mail.apu.edu.my." id="email" type="email" required aria-describedby="email-error" placeholder="tp090526@mail.apu.edu.my" autocomplete="email" maxlength="254" pattern="[^\s@]+@mail\.apu\.edu\.my" form="backend-form" name="email" value="<?php echo value('email','email',''); ?>">
+              <input title="Student emails must end with @mail.apu.edu.my." id="email" type="email" required aria-describedby="email-error" placeholder="tp090526@mail.apu.edu.my" autocomplete="email" maxlength="254" pattern="[^\s@]+@[mM][aA][iI][lL]\.[aA][pP][uU]\.[eE][dD][uU]\.[mM][yY]" form="backend-form" name="email" value="<?php echo value('email','email',''); ?>">
               <p class="field-error" id="email-error">Use your @mail.apu.edu.my student email address.</p>
             </div>
             <div class="field">

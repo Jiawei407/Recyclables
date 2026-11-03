@@ -5,6 +5,19 @@ function metric($label) {
     $where=''; $values=[];
     if ($role === 'user') { $where=' WHERE u.id=?'; $values=[$uid]; }
     if ($role === 'faculty') { $where=' WHERE u.faculty=?'; $values=[$faculty]; }
+    if (str_contains($label,'participation rate') || str_contains($label,'active participants')) {
+        // Participation means an active participant account has joined at least one challenge.
+        // EXISTS counts a person once even when they join multiple challenges.
+        $eligible=" u.status='active' AND u.role='user'";
+        $scope=$where . ($where ? ' AND' : ' WHERE') . $eligible;
+        $participants=(int)one('SELECT COUNT(*) AS total FROM users u' . $scope . ' AND EXISTS(SELECT 1 FROM user_challenges uc WHERE uc.user_id=u.id)',$values)['total'];
+        if (str_contains($label,'active participants')) return $participants;
+        $accounts=(int)one('SELECT COUNT(*) AS total FROM users u' . $scope,$values)['total'];
+        return ($accounts ? round(100*$participants/$accounts) : 0) . '%';
+    }
+    if (str_contains($label,'challenges completed')) {
+        return one("SELECT COUNT(DISTINCT s.challenge_id) AS total FROM submissions s JOIN users u ON u.id=s.user_id" . $where . ($where ? ' AND' : ' WHERE') . " s.status='approved'",$values)['total'];
+    }
     if (str_contains($label,'popular')) {
         $order=str_contains($label,'least') ? 'ASC' : 'DESC';
         $row=one('SELECT c.title,COUNT(uc.user_id) AS total FROM challenges c LEFT JOIN user_challenges uc ON uc.challenge_id=c.id GROUP BY c.id ORDER BY total ' . $order . ',c.id LIMIT 1');

@@ -15,7 +15,7 @@ if ($type === 'evidence') {
     $image=one('SELECT image FROM ' . $table . ' WHERE id=?',[$id]);
     $name=$image['image'] ?? '';
 }
-if (!preg_match('/^[a-f0-9]{32}\.(jpg|png|pdf)$/',$name) || !is_file(__DIR__ . '/storage/uploads/' . $name)) {
+if (!preg_match('/^[a-f0-9]{32}\.(jpg|png|pdf|heic|heif)$/',$name) || !is_file(__DIR__ . '/storage/uploads/' . $name)) {
     http_response_code(404); exit('File not available.');
 }
 $path=__DIR__ . '/storage/uploads/' . $name;

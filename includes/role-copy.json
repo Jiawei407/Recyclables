@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "scope": "Authenticated role pages; original titles, factual records, controls, constraints and workflows are preserved.",
+  "normalization": "Match complete element text with br replaced by a space and whitespace collapsed. Apply each replacement once to the original element text, then override or add the page-header description for its route.",
+  "shared": {
+    "No automatic fraud decisions. A coordinator reviews the evidence and records a clear reason for revision or rejection.": "A coordinator reviews the evidence and records the decision. Review notes are optional.",
+    "Complete all three checks before approving. Add review notes when rejecting evidence or requesting revision.": "Complete all three checks before approving. Review notes are optional for every decision.",
+    "Recognise the habits that make a difference.": "Configure achievement requirements and review badge status.",
+    "Every verified action helps your faculty’s progress.": "Faculty rankings use Green Points from approved submissions.",
+    "Grow participation across the faculty.": "Track participation against the faculty target.",
+    "A recorded decision keeps the participant and reviewer informed.": "View recorded review decisions and submission statuses.",
+    "Use a short title and a useful, specific message for the campus.": "View announcement titles, publication dates and statuses.",
+    "Group related challenges into a manageable campus campaign.": "View campaign periods, statuses and available actions.",
+    "A simple target for the campaign.": "Number of participants targeted by this campaign.",
+    "Explain the shared purpose of the included challenges.": "Describe the campaign and its included challenges.",
+    "Keep the task specific, the evidence clear, and the reward easy to understand.": "Enter the challenge details, evidence requirements and Green Points.",
+    "Choose a simple illustration for this challenge.": "Upload a photo for this challenge.",
+    "Celebrate progress across faculties, then use the campaign view to see where a reminder may help.": "Open the campaign view to review participation and completion.",
+    "Review evidence, plan campaigns and help participants understand what good progress looks like.": "Review evidence and manage challenges, campaigns and announcements."
+  },
+  "routes": {
+    "admin/achievements-achievements.html": {
+      "description": "View achievement badges, requirements and statuses.",
+      "replacements": {}
+    },
+    "admin/achievements-create-upload-badge.html": {
+      "description": "Create an achievement badge and configure its requirements.",
+      "replacements": {}
+    },
+    "admin/achievements-create.html": {
+      "description": "Create an achievement badge and configure its requirements.",
+      "replacements": {}
+    },
+    "admin/achievements-edit-upload-badge.html": {
+      "description": "Edit an achievement badge and its requirements.",
+      "replacements": {}
+    },
+    "admin/achievements-edit.html": {
+      "description": "Edit an achievement badge and its requirements.",
+      "replacements": {}
+    },
+    "admin/audit-log-audit-details.html": {
+      "description": "View the details of a recorded administrative action.",
+      "replacements": {}
+    },
+    "admin/audit-log.html": {
+      "description": "Find recorded administrative actions by date, actor and action type.",
+      "replacements": {}
+    },
+    "admin/challenge-balancing-delete-challenge.html": {
+      "description": "Compare challenge performance and edit points, dates, content and requirements.",
+      "replacements": {}
+    },
+    "admin/challenge-balancing-upload-challenge-photo.html": {
+      "description": "Compare challenge performance and edit points, dates, content and requirements.",
+      "replacements": {}
+    },
+    "admin/challenge-balancing.html": {
+      "description": "Compare challenge performance and edit points, dates, content and requirements.",
+      "replacements": {}
+    },
+    "admin/home.html": {
+      "description": "View user activity, point corrections and reported environmental totals.",
+      "replacements": {
+        "Good. Keep the campus growing.": "Platform status: Good",
+        "People making progress": "Participant activity",
+        "Review now": "Point corrections"
+      }
+    },
+    "admin/impact-analytics.html": {
+      "description": "View reported environmental totals, action counts and the annual campus target.",
+      "replacements": {}
+    },
+    "admin/leaderboard-point-corrections.html": {
+      "description": "Review evidence and audit records before correcting a participant's Green Points.",
+      "replacements": {}
+    },
+    "admin/leaderboard-review-user-points.html": {
+      "description": "Review evidence and audit records before correcting a participant's Green Points.",
+      "replacements": {}
+    },
+    "admin/leaderboard-view-rankings.html": {
+      "description": "View participant and faculty rankings by Green Points.",
+      "replacements": {}
+    },
+    "admin/reports-faculty-report.html": {
+      "description": "View the selected faculty report, activity results, notes and attachments.",
+      "replacements": {}
+    },
+    "admin/reports-faculty-reports.html": {
+      "description": "View submitted faculty reports and their recorded activity outcomes.",
+      "replacements": {}
+    },
+    "admin/users-create-user.html": {
+      "description": "Create a user account and set its role, status and permissions.",
+      "replacements": {}
+    },
+    "admin/users-delete-user.html": {
+      "description": "Edit account details, role and status, or manage account access.",
+      "replacements": {}
+    },
+    "admin/users-edit-user.html": {
+      "description": "Edit account details, role and status, or manage account access.",
+      "replacements": {}
+    },
+    "admin/users-suspend-user.html": {
+      "description": "Edit account details, role and status, or manage account access.",
+      "replacements": {}
+    },
+    "admin/users-users.html": {
+      "description": "Find user accounts and manage their roles, details and status.",
+      "replacements": {
+        "People on the platform": "User accounts"
+      }
+    },
+    "coordinator/analytics.html": {
+      "description": "View challenge participation, completion rates and faculty activity.",
+      "replacements": {}
+    },
+    "coordinator/announcements-all-announcements.html": {
+      "description": "View campus announcements, publication dates and statuses.",
+      "replacements": {}
+    },
+    "coordinator/announcements-create.html": {
+      "description": "Create a campus announcement with a publish date and audience.",
+      "replacements": {}
+    },
+    "coordinator/announcements-edit.html": {
+      "description": "Edit the selected campus announcement, publish date and audience.",
+      "replacements": {}
+    },
+    "coordinator/campaigns-campaigns.html": {
+      "description": "View campaigns, schedules and statuses, or create a campaign.",
+      "replacements": {}
+    },
+    "coordinator/campaigns-create.html": {
+      "description": "Create a campaign with a schedule, participant target and linked challenges.",
+      "replacements": {}
+    },
+    "coordinator/campaigns-edit.html": {
+      "description": "Edit a campaign's schedule, participant target and linked challenges.",
+      "replacements": {}
+    },
+    "coordinator/campaigns-performance.html": {
+      "description": "View campaign participation, completed submissions and target progress.",
+      "replacements": {}
+    },
+    "coordinator/challenges-all-challenges.html": {
+      "description": "View challenges, their statuses, Green Points and end dates.",
+      "replacements": {}
+    },
+    "coordinator/challenges-create-upload-photo.html": {
+      "description": "Create a challenge with Green Points, evidence requirements and a schedule.",
+      "replacements": {}
+    },
+    "coordinator/challenges-create.html": {
+      "description": "Create a challenge with Green Points, evidence requirements and a schedule.",
+      "replacements": {}
+    },
+    "coordinator/challenges-edit-upload-photo.html": {
+      "description": "Edit a challenge's Green Points, evidence requirements and schedule.",
+      "replacements": {}
+    },
+    "coordinator/challenges-edit.html": {
+      "description": "Edit a challenge's Green Points, evidence requirements and schedule.",
+      "replacements": {}
+    },
+    "coordinator/home.html": {
+      "description": "View program status, evidence review queues, participation and campaign targets.",
+      "replacements": {
+        "A growing campus. A thoughtful review.": "Program overview",
+        "A growing campus.A thoughtful review.": "Program overview",
+        "Needs your attention": "Review queues",
+        "Your next priorities": "Submission reviews"
+      }
+    },
+    "coordinator/profile-change-password.html": {
+      "description": "Change the password for your coordinator account.",
+      "replacements": {}
+    },
+    "coordinator/profile-manage-account.html": {
+      "description": "Update your coordinator account details and view its status.",
+      "replacements": {
+        "Keep the program moving thoughtfully.": "Account summary",
+        "Keep the programmoving thoughtfully.": "Account summary"
+      }
+    },
+    "coordinator/submissions-approved.html": {
+      "description": "View approved evidence submissions.",
+      "replacements": {}
+    },
+    "coordinator/submissions-needs-revision.html": {
+      "description": "View evidence submissions that require revision.",
+      "replacements": {}
+    },
+    "coordinator/submissions-pending.html": {
+      "description": "View evidence submissions awaiting coordinator review.",
+      "replacements": {}
+    },
+    "coordinator/submissions-rejected.html": {
+      "description": "View rejected evidence submissions.",
+      "replacements": {}
+    },
+    "coordinator/submissions-review-submission.html": {
+      "description": "Review the selected submission's evidence, quantities and recorded status.",
+      "replacements": {}
+    },
+    "faculty/announcements-announcements.html": {
+      "description": "View faculty announcements, publication dates and statuses.",
+      "replacements": {}
+    },
+    "faculty/announcements-create.html": {
+      "description": "Create a faculty announcement with a publish date and audience.",
+      "replacements": {}
+    },
+    "faculty/announcements-edit.html": {
+      "description": "Edit the selected faculty announcement, publish date and audience.",
+      "replacements": {}
+    },
+    "faculty/faculty-activities-create-activity.html": {
+      "description": "Propose a faculty activity with its date, location and participant limit.",
+      "replacements": {}
+    },
+    "faculty/faculty-activities-faculty-cleanup.html": {
+      "description": "View the selected faculty activity's schedule, location and details.",
+      "replacements": {}
+    },
+    "faculty/faculty-activities-proposed-activities.html": {
+      "description": "View proposed faculty activities, their dates and statuses.",
+      "replacements": {}
+    },
+    "faculty/home.html": {
+      "description": "View faculty Green Points, ranking, participation and achievement targets.",
+      "replacements": {}
+    },
+    "faculty/insights-achievements.html": {
+      "description": "View faculty achievement requirements and completion progress.",
+      "replacements": {}
+    },
+    "faculty/insights-leaderboard.html": {
+      "description": "View faculty rankings by Green Points.",
+      "replacements": {}
+    },
+    "faculty/insights-overview.html": {
+      "description": "View faculty ranking, Green Points, completed activities and participation.",
+      "replacements": {}
+    },
+    "faculty/insights-reports.html": {
+      "description": "View faculty reports and open their details.",
+      "replacements": {}
+    },
+    "faculty/participation-campus-cleanup.html": {
+      "description": "View participation details for the selected challenge.",
+      "replacements": {}
+    },
+    "faculty/participation-challenge-participation.html": {
+      "description": "View joined, active and completed participation for faculty challenges.",
+      "replacements": {}
+    },
+    "faculty/participation-completion-rates.html": {
+      "description": "View faculty challenge completion counts and rates by month.",
+      "replacements": {}
+    },
+    "faculty/promote-challenges-available-challenges.html": {
+      "description": "View available challenges and feature them for your faculty.",
+      "replacements": {}
+    },
+    "faculty/promote-challenges-feature-challenge.html": {
+      "description": "View challenge details and feature the challenge for your faculty.",
+      "replacements": {}
+    },
+    "faculty/promote-challenges-featured-for-faculty.html": {
+      "description": "View challenges featured for your faculty or remove a feature.",
+      "replacements": {}
+    },
+    "faculty/submit-report-activity-report.html": {
+      "description": "View faculty report details, participants and recorded outcomes.",
+      "replacements": {}
+    },
+    "faculty/submit-report-reports.html": {
+      "description": "View faculty reports, reporting periods and statuses.",
+      "replacements": {}
+    },
+    "faculty/submit-report-submit-report.html": {
+      "description": "Submit an activity report with its period, participants, outcomes and attachment.",
+      "replacements": {}
+    },
+    "user/achievements-earned.html": {
+      "description": "View earned badges and their completed requirements.",
+      "replacements": {}
+    },
+    "user/achievements-locked.html": {
+      "description": "View locked badges and their completion requirements.",
+      "replacements": {
+        "Your next milestones": "Locked badges"
+      }
+    },
+    "user/achievements-recycling-helper.html": {
+      "description": "View achievement requirements and your completion progress.",
+      "replacements": {}
+    },
+    "user/challenges-browse.html": {
+      "description": "Find available challenges and view their requirements, Green Points and deadlines.",
+      "replacements": {}
+    },
+    "user/challenges-completed.html": {
+      "description": "View completed challenges, completion dates and earned Green Points.",
+      "replacements": {}
+    },
+    "user/challenges-my-challenges.html": {
+      "description": "View joined challenges and their submission or review status.",
+      "replacements": {}
+    },
+    "user/challenges-view-challenge.html": {
+      "description": "View available challenges and their requirements.",
+      "replacements": {}
+    },
+    "user/home.html": {
+      "description": "View announcements, Green Points, challenge status and achievement progress.",
+      "replacements": {
+        "Around campus": "Announcements",
+        "Your next milestone": "Achievement progress"
+      }
+    },
+    "user/leaderboard-faculty-ranking.html": {
+      "description": "View faculty rankings by Green Points.",
+      "replacements": {}
+    },
+    "user/leaderboard-individual-ranking.html": {
+      "description": "View participant rankings by Green Points.",
+      "replacements": {}
+    },
+    "user/profile-change-password-validation.html": {
+      "description": "Manage your account details and password.",
+      "replacements": {}
+    },
+    "user/profile-change-password.html": {
+      "description": "Manage your account details and password.",
+      "replacements": {}
+    },
+    "user/profile-edit-details.html": {
+      "description": "Update your name, email, faculty and university ID.",
+      "replacements": {}
+    },
+    "user/profile-profile.html": {
+      "description": "View your name, email, faculty, university ID and account status.",
+      "replacements": {
+        "A little progress, every day.": "Account details and faculty affiliation."
+      }
+    },
+    "user/submit-evidence-new-submission.html": {
+      "description": "Select a challenge and submit photo evidence with a description and quantity.",
+      "replacements": {}
+    },
+    "user/submit-evidence-submission-details.html": {
+      "description": "View the selected submission's evidence, status, Green Points and reviewer notes.",
+      "replacements": {}
+    },
+    "user/submit-evidence-submission-status.html": {
+      "description": "Find your evidence submissions and view their review status and Green Points.",
+      "replacements": {}
+    },
+    "user/submit-evidence-upload-failed.html": {
+      "description": "Select a challenge and submit photo evidence with a description and quantity.",
+      "replacements": {}
+    },
+    "user/submit-evidence-upload-photo.html": {
+      "description": "Select a challenge and submit photo evidence with a description and quantity.",
+      "replacements": {}
+    }
+  }
+}

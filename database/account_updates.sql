@@ -1,5 +1,5 @@
 -- Account-only revision. Existing user IDs, roles and all other records are preserved.
-USE recyclables_db;
+USE recyclables_ui_db;
 START TRANSACTION;
 UPDATE users SET email='tp900001@mail.apu.edu.my', university_id='TP900001', password='$2y$10$WL4uOrJ8eti/PP8fZuNA.O3ZY9ODpM5IaWlsGVmmZ0iGV.uonqAUm' WHERE id=1;
 UPDATE users SET email='faculty@mail.apu.edu.my', university_id='DEMOFACULTY', password='$2y$10$gHBXTzyzUwblB00OdTsnd.BlzVJMx2kGbYLrGS96KYDGV0.Y6.OLS' WHERE id=2;

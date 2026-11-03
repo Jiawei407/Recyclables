@@ -1,0 +1,203 @@
+/* Task-heavy role screens: quieter hierarchy, no decorative opening imagery.
+   Scope is deliberately limited to calm workspace bodies; public pages,
+   expressive dashboards/profiles, modal alerts and source controls are untouched. */
+.workspace-page body.intensity-calm .workspace-content{
+  padding-top: 24px;
+  padding-bottom: 56px;
+}
+.workspace-page body.intensity-calm .workspace-intro,.workspace-page body.intensity-calm .workspace-intro.intro-list,.workspace-page body.intensity-calm .workspace-intro.intro-plain{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px 24px;
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #afbdaf;
+}
+.workspace-page body.intensity-calm .workspace-intro figure{ display: none; }
+.workspace-page body.intensity-calm .workspace-intro h1,.workspace-page body.intensity-calm .workspace-intro.intro-plain h1{
+  font-size: 32px;
+  line-height: 1.14;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  max-width: 32ch;
+}
+.workspace-page body.intensity-calm .workspace-intro .context-line{
+  margin: 10px 0 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4c6253;
+}
+.workspace-page body.intensity-calm .workspace-intro .page-description{
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 72ch;
+}
+.workspace-page body.intensity-calm .workspace-intro .page-actions{ margin: 0; }
+.workspace-page body.intensity-calm .workspace-content > .stack{ gap: 24px; }
+.workspace-page body.intensity-calm .workspace-content .panel,.workspace-page body.intensity-calm .workspace-content .media-card,.workspace-page body.intensity-calm .workspace-content .badge-card{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top-color: #afbdaf;
+  box-shadow: none;
+}
+.workspace-page body.intensity-calm .workspace-content .panel-heading{
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.workspace-page body.intensity-calm .workspace-content .panel > h2,.workspace-page body.intensity-calm .workspace-content .panel-heading h2{
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -.015em;
+}
+.workspace-page body.intensity-calm .workspace-content .media-card > h3,.workspace-page body.intensity-calm .workspace-content .badge-card > h3{
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+}
+.workspace-page body.intensity-calm .workspace-content .panel p,.workspace-page body.intensity-calm .workspace-content .media-card p{
+  max-width: 72ch;
+}
+.workspace-page body.intensity-calm .workspace-content .grid-2,.workspace-page body.intensity-calm .workspace-content .grid-3,.workspace-page body.intensity-calm .workspace-content .grid-4{ gap: 24px; }
+.workspace-page body.intensity-calm .workspace-content .tabs,.workspace-page body.intensity-calm .workspace-content .page-tabs{
+  display: flex;
+  flex-wrap: wrap;
+  overflow: visible;
+  white-space: normal;
+  gap: 4px 22px;
+  margin-bottom: 20px;
+}
+.workspace-page body.intensity-calm .workspace-content .tabs a,.workspace-page body.intensity-calm .workspace-content .page-tabs a{
+  min-height: 44px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: normal;
+  font-size: 14px;
+}
+.workspace-page body.intensity-calm .workspace-content .toolbar{
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.workspace-page body.intensity-calm .workspace-content .data-table{
+  font-size: 15px;
+  line-height: 1.5;
+}
+.workspace-page body.intensity-calm .workspace-content .data-table th{
+  padding: 11px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  background: transparent;
+}
+.workspace-page body.intensity-calm .workspace-content .data-table td{
+  padding: 12px;
+  background: transparent;
+}
+.workspace-page body.intensity-calm .workspace-content .data-table .text-link{
+  min-height: 40px;
+  font-size: 14px;
+}
+.workspace-page body.intensity-calm .workspace-content .form-grid{
+  column-gap: 24px;
+  row-gap: 20px;
+}
+.workspace-page body.intensity-calm .workspace-content .field label{
+  font-size: 14px;
+  line-height: 1.5;
+}
+.workspace-page body.intensity-calm .workspace-content .field input:not([type=radio]):not([type=checkbox]):not([type=hidden]):not([type=file]),.workspace-page body.intensity-calm .workspace-content .field select{
+  min-height: 48px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  font-size: 16px;
+}
+.workspace-page body.intensity-calm .workspace-content .field textarea{
+  font-size: 16px;
+  line-height: 1.5;
+}
+.workspace-page body.intensity-calm .workspace-content .button{
+  min-height: 44px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+.workspace-page body.intensity-calm .workspace-content .metric{
+  padding: 14px 0;
+}
+.workspace-page body.intensity-calm .workspace-content .metric-value{
+  margin-top: 10px;
+  font-size: 30px;
+  line-height: 1.1;
+}
+.workspace-page body.intensity-calm .workspace-content .metric-label{ font-size: 13px; }
+.workspace-page body.intensity-calm .workspace-content .metric-note{ font-size: 13px; }
+/* These are contextual panels, not validation/safety notices. Keep feedback
+   notices and modal content in their original semantic treatments. */
+.workspace-page body.intensity-calm .workspace-content .panel--forest,.workspace-page body.intensity-calm .workspace-content .announcement-banner{
+  padding: 20px 0;
+  background: transparent;
+  border-top: 1px solid #afbdaf;
+  color: #102d1d;
+}
+.workspace-page body.intensity-calm .workspace-content .panel--forest p,.workspace-page body.intensity-calm .workspace-content .panel--forest .context-line,.workspace-page body.intensity-calm .workspace-content .announcement-banner p,.workspace-page body.intensity-calm .workspace-content .announcement-banner .panel p{
+  color: #4c6253;
+}
+.workspace-page body.intensity-calm .workspace-content .announcement-banner .panel{
+  color: #102d1d;
+}
+.workspace-page body.intensity-calm .workspace-content .panel--forest .button--primary{
+  background: #173f2a;
+  color: #f3f5ef;
+  border-color: #173f2a;
+}
+.workspace-page body.intensity-calm .workspace-content .panel--forest .button--primary:hover{
+  background: #365e43;
+  color: #f3f5ef;
+}
+.workspace-page body.intensity-calm .workspace-content .task-layout{
+  gap: 40px;
+}
+.workspace-page body.intensity-calm .workspace-content .task-guidance{
+  padding-top: 20px;
+}
+.workspace-page body.intensity-calm .workspace-content .task-guidance .notice strong{
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.workspace-page body.intensity-calm .workspace-content .task-guidance .notice p{
+  font-size: 14px;
+  line-height: 1.6;
+}
+.workspace-page body.intensity-calm .workspace-content .form-actions{
+  gap: 12px;
+  padding-top: 20px;
+}
+.workspace-page body.intensity-calm .workspace-content .detail-list > div{
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+@media(max-width:760px) {
+  .workspace-page body.intensity-calm .workspace-content{
+    padding-top: 20px;
+    padding-bottom: 44px;
+  }
+  .workspace-page body.intensity-calm .workspace-intro,.workspace-page body.intensity-calm .workspace-intro.intro-list,.workspace-page body.intensity-calm .workspace-intro.intro-plain{
+    display: block;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+  }
+  .workspace-page body.intensity-calm .workspace-intro h1,.workspace-page body.intensity-calm .workspace-intro.intro-plain h1{ font-size: 30px; }
+  .workspace-page body.intensity-calm .workspace-intro .page-actions{ margin-top: 18px; }
+  .workspace-page body.intensity-calm .workspace-content > .stack{ gap: 20px; }
+  .workspace-page body.intensity-calm .workspace-content .grid-2,.workspace-page body.intensity-calm .workspace-content .grid-3,.workspace-page body.intensity-calm .workspace-content .grid-4{ gap: 20px; }
+  .workspace-page body.intensity-calm .workspace-content .data-table tr{ padding: 10px 0; }
+  .workspace-page body.intensity-calm .workspace-content .data-table td{ padding: 8px 0; }
+  .workspace-page body.intensity-calm .workspace-content .data-table .cell-label{ font-size: 13px; }
+  .workspace-page body.intensity-calm .workspace-content .task-guidance{ margin-top: 24px; }
+}
+.workspace-page body.intensity-calm .upload-zone{padding:18px;background:transparent;border:1px solid #afbdaf;gap:12px}
+.workspace-page body.intensity-calm .photo-preview-empty{display:flex;min-height:82px;height:auto;justify-content:flex-start;align-items:center;gap:14px;padding:16px;background:#e4eadf}
+.workspace-page body.intensity-calm .photo-preview-empty .icon{width:24px;height:24px;flex:0 0 24px}
+.workspace-page body.intensity-calm .photo-preview-empty img{max-height:240px;max-width:100%;object-fit:contain}

@@ -1,0 +1,43 @@
+/* Shared task patterns across roles; role-specific fields and permissions remain intact. */
+.workspace-page body.intensity-calm .workspace-intro .page-description{font-size:16px;line-height:1.5;max-width:70ch}
+.workspace-page body.intensity-calm .workspace-intro.intro-plain{display:grid;grid-template-columns:minmax(0,1fr) auto}
+.workspace-page body.intensity-calm .workspace-intro .page-actions{margin:0;align-self:end}
+.workspace-page body.intensity-calm .workspace-intro>.note{max-width:32ch;text-align:end}
+.workspace-page body .workspace-content>.stack>.page-tabs+.panel{border-top:0}
+.workspace-page body.intensity-calm[data-surface=form] .workspace-content>.stack{max-width:1080px}
+.workspace-page body[data-surface=form] .workspace-content>.stack .form-grid{column-gap:24px;row-gap:24px}
+.workspace-page body[data-surface=form] .workspace-content .form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.workspace-page body.intensity-calm[data-surface=form] .workspace-content .page-tabs{margin-bottom:0}
+.workspace-page body.intensity-calm[data-surface=form] .workspace-content>.page-tabs{margin-bottom:24px}
+.workspace-page body.intensity-calm[data-surface=form] .workspace-content .page-tabs+.panel{border-top:0;padding-top:0}
+.workspace-page body.intensity-calm[data-surface=form] .workspace-content>.page-tabs+.stack>.panel:first-child{border-top:0;padding-top:0}
+.workspace-page body[data-page-family=announcements] .workspace-content .field textarea{min-height:160px}
+.workspace-page body[data-page-family=reports] .workspace-content .data-table th:nth-child(1){width:34%}
+.workspace-page body[data-page-family=reports][data-surface=detail] .workspace-content .data-table[data-columns="3"] th:nth-child(2){width:18%}
+.workspace-page body[data-page-family=reports][data-surface=detail] .workspace-content .data-table[data-columns="3"] th:nth-child(3){width:48%}
+.workspace-page body[data-page-family=reports] .workspace-content>.stack>.button{align-self:flex-start;justify-self:start}
+.workspace-page body[data-page-family=reports] .workspace-content article.panel.stack{gap:12px}
+.workspace-page body[data-page-family=reports] .workspace-content article.panel.stack>.context-line,.workspace-page body[data-page-family=reports] .workspace-content article.panel.stack>.muted{margin:0}
+.workspace-page body[data-page-family=reports] .workspace-content .disclosure>summary{font-size:16px;min-height:44px}
+.workspace-page body[data-page-family=reports] .workspace-content .disclosure .disclosure>summary{padding:8px 12px}
+.workspace-page body[data-page-family=reports] .workspace-content .disclosure>.stack{gap:24px;padding-top:24px}
+.workspace-page body[data-page-family=reports] .workspace-content .disclosure section>h3{font:500 20px/1.25 'Albert Sans',Arial,sans-serif;margin-bottom:16px}
+.workspace-page body[data-page-family=reports] .workspace-content>section.panel.stack{margin-top:24px}
+.workspace-page body .workspace-content .form-grid>.field-full,.workspace-page body .workspace-content .form-grid>.field--full{grid-column:1/-1}
+.workspace-page body .workspace-content fieldset{min-width:0}
+.workspace-page body .workspace-content .challenge-choice-field{border:0;padding:0;margin:0}
+.workspace-page body .workspace-content .challenge-choice-field>legend{font:600 16px/1.5 'Source Sans 3',Arial,sans-serif;color:#102d1d;padding:0;margin-bottom:8px}
+.workspace-page body .workspace-content fieldset:has(>.selection-multi){border:0;padding:0;margin:0}
+.workspace-page body .workspace-content fieldset:has(>.selection-multi)>legend{font:600 16px/1.5 'Source Sans 3',Arial,sans-serif;color:#102d1d;padding:0;margin-bottom:8px}
+.workspace-page body .workspace-content .form-actions:empty,.workspace-page body .workspace-content .form-actions.is-empty{display:none}
+.workspace-page body .workspace-content .upload-zone>.field-hint{margin:0}
+.workspace-page body .action-dialog .form-grid{gap:24px}
+.workspace-page body .action-dialog .dialog-header .page-description{max-width:65ch}
+.workspace-page body .action-dialog .dialog-content{min-width:0}
+.workspace-page body .evidence-placeholder{font-size:16px;line-height:1.5;text-align:center}
+@media(max-width:760px){
+ .workspace-page body.intensity-calm .workspace-intro.intro-plain{grid-template-columns:1fr;gap:12px}
+ .workspace-page body.intensity-calm .workspace-intro>.note{text-align:start}
+ .workspace-page body[data-page-family=reports] .workspace-content .data-table th{width:auto}
+ .workspace-page body[data-surface=form] .workspace-content .form-actions{gap:12px}
+}

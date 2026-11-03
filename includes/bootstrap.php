@@ -55,3 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(422);
     }
 }
+// Present authenticated workspaces after PHP has generated their live data and forms.
+// Public/account pages and POST redirects keep their original rendering path.
+if (isset($page_role) && isset($page) && is_array($user)) {
+    require_once __DIR__ . '/role-presentation.php';
+    ob_start(static function (string $html) use ($page, $user): string {
+        return render_role_layout($html, $page, $user);
+    });
+}

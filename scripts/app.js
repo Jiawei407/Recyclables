@@ -1,15 +1,32 @@
 // Small JavaScript enhancements; PHP still validates everything on the server.
 document.querySelectorAll('input[type="file"]').forEach(function (input) {
+  var previewUrl = null;
   input.addEventListener('change', function () {
+    if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
     var label = document.querySelector('[data-file-name="' + input.id + '"]');
     if (label) label.textContent = input.files.length ? input.files[0].name : 'Choose file';
     var preview = document.querySelector('[data-photo-preview]');
-    if (preview && input.files.length && /^image\//.test(input.files[0].type)) {
+    if (preview && input.files.length && (/^image\//.test(input.files[0].type) || /\.hei[cf]$/i.test(input.files[0].name))) {
       var image = document.createElement('img');
-      image.src = URL.createObjectURL(input.files[0]); image.alt = 'Selected photo'; image.width = 400;
-      image.onload = function () { URL.revokeObjectURL(image.src); };
+      previewUrl = URL.createObjectURL(input.files[0]);
+      image.src = previewUrl; image.alt = 'Selected photo'; image.width = 400;
+      image.onload = function () { URL.revokeObjectURL(image.src); if (previewUrl === image.src) previewUrl = null; };
+      image.onerror = function () {
+        if (preview.children[0] !== image) return;
+        var link = document.createElement('a'); link.href = image.src; link.download = input.files[0].name;
+        link.textContent = 'Preview unavailable in this browser. Download the selected photo to view it.';
+        preview.replaceChildren(link);
+      };
       preview.replaceChildren(image);
-    }
+    } else if (preview) preview.replaceChildren();
+  });
+});
+// Private media remains behind file.php authorization; browsers without HEIC decoding get a real download.
+document.querySelectorAll('img[src*="file.php"]').forEach(function (image) {
+  image.addEventListener('error', function () {
+    var link = document.createElement('a'); link.href = image.src; link.className = 'text-link';
+    link.textContent = 'Image preview unavailable. Open or download the uploaded image.';
+    link.target = '_blank'; link.rel = 'noopener'; image.replaceWith(link);
   });
 });
 var passwords = document.querySelectorAll('input[type="password"]');
@@ -29,12 +46,12 @@ if (accountRole) {
     var email = document.querySelector('#email');
     var universityId = document.querySelector('#university-id');
     if (email) {
-      email.pattern = student ? '[^\\s@]+@mail\\.apu\\.edu\\.my' : '[^\\s@]+@[^\\s@]+\\.[^\\s@]+';
-      email.title = student ? 'Use your @mail.apu.edu.my student email.' : 'Enter a valid account email.';
+      email.pattern = '[^\\s@]+@[mM][aA][iI][lL]\\.[aA][pP][uU]\\.[eE][dD][uU]\\.[mM][yY]';
+      email.title = 'Use your @mail.apu.edu.my university email.';
       email.placeholder = student ? 'tp090526@mail.apu.edu.my' : 'admin@mail.apu.edu.my';
     }
     if (universityId) {
-      universityId.pattern = student ? 'TP[0-9]{6}' : '.{1,20}';
+      universityId.pattern = student ? '[Tt][Pp][0-9]{6}' : '.{1,20}';
       universityId.maxLength = student ? 8 : 20;
       universityId.title = student ? 'TP followed by six digits, for example TP090526.' : 'Enter the staff or university ID.';
       universityId.placeholder = student ? 'TP090526' : 'University ID';
@@ -53,7 +70,7 @@ document.querySelectorAll('.toolbar').forEach(function (toolbar) {
     choice = statusChoices[choice] || choice;
     if (/^(all|choose|any)/.test(choice)) choice = '';
     document.querySelectorAll('[data-record]').forEach(function (record) {
-      var text = record.textContent.toLowerCase();
+      var text = (record.dataset.filterText !== undefined ? record.dataset.filterText : record.textContent).toLowerCase();
       var status=record.dataset.status || '';
       var matchesChoice=!choice || text.includes(choice) || status===choice;
       if (choice==='current month' || choice==='this month' || choice==='previous month' || choice==='last month') {
@@ -76,10 +93,18 @@ document.querySelectorAll('form[data-confirm]').forEach(function (form) {
 });
 var dialog = document.querySelector('[role="dialog"]');
 if (dialog) {
-  var focusables = dialog.querySelectorAll('a[href],button,input,select,textarea');
+  function dialogControls() {
+    return Array.from(dialog.querySelectorAll('a[href],button,input,select,textarea')).filter(function (control) {
+      return control.type !== 'hidden' && !control.disabled && !control.hidden && control.tabIndex !== -1 &&
+        !(typeof control.closest === 'function' && control.closest('[hidden],[inert]')) &&
+        !(typeof control.getClientRects === 'function' && !control.getClientRects().length);
+    });
+  }
+  var focusables = dialogControls();
   if (focusables.length) focusables[0].focus();
   dialog.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') { var close=dialog.querySelector('.close-button'); if (close) close.click(); }
+    focusables = dialogControls();
     if (event.key !== 'Tab' || !focusables.length) return;
     var first=focusables[0], last=focusables[focusables.length-1];
     if (event.shiftKey && document.activeElement === first) { last.focus(); event.preventDefault(); }

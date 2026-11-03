@@ -1,7 +1,7 @@
 <?php
 if ($action === 'register') {
     $name = post('full-name'); $email = strtolower(post('email'));
-    $id = post('student-id'); $faculty = post('faculty');
+    $id = strtoupper(post('student-id')); $faculty = post('faculty');
     $password = raw_password('password'); $confirm = raw_password('confirm-password');
     $problem = account_error($name, $email, $id, $faculty, $password, $confirm);
     need($problem === '', $problem);
@@ -26,6 +26,7 @@ if ($action === 'profile') {
     $name = post('profile-name', post('account-name'));
     $email = strtolower(post('profile-email', post('account-email')));
     $id = post('profile-id', post('account-id'));
+    if ($user['role'] === 'user') $id = strtoupper($id);
     // A representative cannot move themselves into a different faculty.
     $faculty = $user['role'] === 'user' ? post('profile-faculty') : $user['faculty'];
     $problem = account_error($name,$email,$id,$faculty,'','',false,$user['role']);

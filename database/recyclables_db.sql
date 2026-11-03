@@ -1,6 +1,7 @@
+-- Dedicated UI-version database. The older recyclables_db database is left untouched.
 -- Import into phpMyAdmin. Existing data is not dropped.
-CREATE DATABASE IF NOT EXISTS recyclables_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE recyclables_db;
+CREATE DATABASE IF NOT EXISTS recyclables_ui_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE recyclables_ui_db;
 CREATE TABLE IF NOT EXISTS users (
  id INT AUTO_INCREMENT PRIMARY KEY, full_name VARCHAR(100) NOT NULL,
  email VARCHAR(254) NOT NULL UNIQUE, university_id VARCHAR(20) NOT NULL UNIQUE,

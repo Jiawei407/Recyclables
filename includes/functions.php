@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/achievement-progress.php';
 function e($value) {
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
@@ -57,17 +58,68 @@ function audit($action, $details) {
     global $user;
     query('INSERT INTO audit_logs (actor_id, action, details) VALUES (?, ?, ?)', [$user['id'] ?? null, $action, $details]);
 }
+function upload_max_bytes() {
+    $configured = getenv('RECYCLABLES_UPLOAD_MAX_BYTES');
+    return $configured !== false && ctype_digit($configured) && (int)$configured > 0 ? (int)$configured : 256 * 1024 * 1024;
+}
+function upload_max_pixels() {
+    $configured = getenv('RECYCLABLES_UPLOAD_MAX_PIXELS');
+    return $configured !== false && ctype_digit($configured) && (int)$configured > 0 ? (int)$configured : 256000000;
+}
+/** Read bounded ISO-BMFF metadata; no image decoding or conversion is performed. */
+function heif_dimensions($path) {
+    $handle = fopen($path, 'rb');
+    if (!$handle) return false;
+    $length = filesize($path); $boxes = 0; $brand = false; $payload = false; $dimensions = false;
+    $scan = function ($start, $end, $depth, $parent = '') use (&$scan, $handle, &$boxes, &$brand, &$payload, &$dimensions) {
+        if ($depth > 8) return false;
+        for ($offset = $start; $offset < $end;) {
+            if ($end - $offset < 8 || ++$boxes > 10000) return false;
+            fseek($handle, $offset); $header = fread($handle, 8);
+            if (strlen($header) !== 8) return false;
+            $size = unpack('N', substr($header, 0, 4))[1]; $type = substr($header, 4, 4); $headerSize = 8;
+            if ($size === 1) {
+                $extended = fread($handle, 8); if (strlen($extended) !== 8) return false;
+                $parts = unpack('Nhigh/Nlow', $extended); if ($parts['high'] !== 0) return false;
+                $size = $parts['low']; $headerSize = 16;
+            } elseif ($size === 0) $size = $end - $offset;
+            if ($size < $headerSize || $size > $end - $offset) return false;
+            $content = $offset + $headerSize; $next = $offset + $size;
+            if ($type === 'ftyp' && $depth === 0) {
+                if ($size - $headerSize < 8 || $size - $headerSize > 4096) return false;
+                fseek($handle, $content); $brands = fread($handle, $size - $headerSize);
+                $candidates = array_merge([substr($brands, 0, 4)], str_split(substr($brands, 8), 4));
+                $brand = (bool)array_intersect($candidates, ['heic','heix','hevc','hevx','mif1','msf1']);
+            } elseif (($type === 'mdat' || ($type === 'idat' && $parent === 'meta')) && $size > $headerSize) $payload = true;
+            elseif ($type === 'ispe' && $parent === 'ipco') {
+                if ($size - $headerSize < 12) return false;
+                fseek($handle, $content); $value = fread($handle, 12);
+                $value = unpack('Nflags/Nwidth/Nheight', $value);
+                if (!$value['width'] || !$value['height']) return false;
+                // A container may have thumbnails; enforce the largest declared image size.
+                if (!$dimensions || $value['width'] * $value['height'] > $dimensions[0] * $dimensions[1]) $dimensions = [$value['width'], $value['height']];
+            } elseif (in_array($type, ['meta','iprp','ipco'], true)) {
+                $children = $content + ($type === 'meta' ? 4 : 0);
+                if ($children > $next || !$scan($children, $next, $depth + 1, $type)) return false;
+            }
+            $offset = $next;
+        }
+        return true;
+    };
+    try { return $scan(0, $length, 0) && $brand && $payload && $dimensions ? $dimensions : false; }
+    finally { fclose($handle); }
+}
 function save_upload($field, $pdf_allowed = false) {
     if (!isset($_FILES[$field]) || $_FILES[$field]['error'] === UPLOAD_ERR_NO_FILE) return '';
     $file = $_FILES[$field];
-    need($file['error'] === UPLOAD_ERR_OK && $file['size'] > 0 && $file['size'] <= 5 * 1024 * 1024, 'Choose a file smaller than 5 MB.');
+    need($file['error'] === UPLOAD_ERR_OK && $file['size'] > 0 && $file['size'] <= upload_max_bytes(), 'Choose a file within the configured upload size limit.');
     $type = (new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']);
-    $types = ['image/jpeg' => 'jpg', 'image/png' => 'png'];
+    $types = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/heic' => 'heic', 'image/heif' => 'heif'];
     if ($pdf_allowed) $types['application/pdf'] = 'pdf';
-    need(isset($types[$type]), $pdf_allowed ? 'Choose a JPG, PNG or PDF.' : 'Choose a JPG or PNG image.');
+    need(isset($types[$type]), $pdf_allowed ? 'Choose a JPG, PNG, HEIC, HEIF or PDF.' : 'Choose a JPG, PNG, HEIC or HEIF image.');
     if ($type !== 'application/pdf') {
-        $image = getimagesize($file['tmp_name']);
-        need($image && $image[0] * $image[1] <= 40000000, 'Choose a valid image smaller than 40 megapixels.');
+        $image = in_array($type, ['image/heic','image/heif'], true) ? heif_dimensions($file['tmp_name']) : @getimagesize($file['tmp_name']);
+        need($image && $image[0] > 0 && $image[1] > 0 && $image[0] * $image[1] <= upload_max_pixels(), 'Choose a valid image within the configured pixel limit.');
     }
     $name = bin2hex(random_bytes(16)) . '.' . $types[$type];
     $folder = __DIR__ . '/../storage/uploads';

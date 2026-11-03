@@ -1,0 +1,61 @@
+/* Themed selection surfaces. Native values, constraints and no-JavaScript fallbacks remain intact. */
+.clay-site .selection-field{display:block;position:relative;width:100%;min-width:0;max-width:100%}
+.clay-site .selection-native{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:0!important;clip-path:inset(50%)!important;overflow:hidden!important;white-space:nowrap!important;border:0!important;opacity:0!important}
+.clay-site .selection-trigger{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;max-width:100%;min-width:0;min-height:48px;padding:12px 14px;border:1px solid #738674;border-radius:0;background:#f8faf5;color:#102d1d;font:400 16px/1.4 'Source Sans 3',Arial,sans-serif;text-align:left;cursor:pointer}
+.clay-site .selection-trigger:hover{background:#e4eadf}
+.clay-site .selection-trigger:disabled{opacity:.65;cursor:default}
+.clay-site .selection-trigger[aria-expanded=true]{border-color:#365e43;background:#e4eadf}
+.clay-site .selection-trigger[aria-invalid=true]{border-color:#9b3131}
+.clay-site .selection-value{min-width:0;overflow-wrap:anywhere}
+.clay-site .selection-icon{display:block;width:20px;height:20px;flex:0 0 20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.clay-site .selection-role{width:250px;max-width:100%;flex-shrink:1}
+.clay-site .selection-field--forest>.selection-trigger{background:#173f2a;color:#f3f5ef;border-color:#6e8975;font-size:14px;min-height:42px;padding:10px 12px}
+.clay-site .selection-field--forest>.selection-trigger:hover,.clay-site .selection-field--forest>.selection-trigger[aria-expanded=true]{background:#365e43}
+.clay-site .selection-trigger:focus-visible,.clay-site .selection-popup :focus-visible{outline:3px solid #365e43;outline-offset:3px}
+.clay-site .selection-field--forest>.selection-trigger:focus-visible{outline-color:#cae88d}
+.clay-site .selection-popup{position:fixed;inset:auto;margin:0;padding:6px;border:1px solid #738674;border-radius:0;background:#f8faf5;color:#102d1d;font:400 16px/1.4 'Source Sans 3',Arial,sans-serif;box-sizing:border-box;z-index:200;overflow:auto;overscroll-behavior:contain;max-width:calc(100vw - 16px)}
+.clay-site .selection-popup[hidden]{display:none!important}
+.clay-site .selection-popup::backdrop{background:transparent;pointer-events:none}
+.clay-site .selection-option{display:flex;align-items:center;min-height:44px;padding:10px 12px;overflow-wrap:anywhere;cursor:pointer;border:1px solid transparent}
+.clay-site .selection-option[aria-selected=true]{background:#cae88d;color:#102d1d;font-weight:600}
+.clay-site .selection-option.is-active{border-color:#365e43;background:#e4eadf;color:#102d1d}
+.clay-site .selection-option[aria-selected=true].is-active{background:#cae88d}
+.clay-site .selection-option[aria-disabled=true]{color:#4c6253;opacity:.65;cursor:default}
+.clay-site .selection-option-group{font-size:14px;font-weight:600;color:#4c6253;padding:12px 12px 6px}
+.clay-site .selection-radio-panel{display:grid;gap:0;padding:6px}
+.clay-site .selection-radio-panel>.check-option{display:flex;align-items:flex-start;justify-content:flex-start;gap:12px;min-height:48px;padding:12px;margin:0;border:0;background:transparent;cursor:pointer}
+.clay-site .selection-radio-panel>.check-option:hover,.clay-site .selection-radio-panel>.check-option:has(:checked){background:#e4eadf}
+.clay-site .selection-radio-panel input[type=radio]{flex:0 0 18px;min-width:18px;width:18px;height:18px;margin:2px 0 0;accent-color:#365e43}
+.clay-site .selection-radio-panel>.check-option>span{min-width:0;text-align:left;overflow-wrap:anywhere}
+.clay-site .selection-multi-panel{display:grid;gap:0;padding:6px}
+.clay-site .selection-multi-panel>.check-option{display:flex;align-items:flex-start;gap:12px;min-height:48px;padding:12px;margin:0;border:0;background:transparent;cursor:pointer}
+.clay-site .selection-multi-panel>.check-option:hover,.clay-site .selection-multi-panel>.check-option:has(:checked){background:#e4eadf}
+.clay-site .selection-multi-panel input[type=checkbox]{flex:0 0 18px;width:18px;min-width:18px;height:18px;margin:2px 0 0;accent-color:#365e43}
+.clay-site .selection-multi-panel>.check-option>span{min-width:0;overflow-wrap:anywhere;text-align:left}
+.clay-site .selection-multi-panel>.check-option:has(:disabled){opacity:.65;cursor:default}
+.clay-site .selection-multi-actions{display:flex;justify-content:flex-end;padding:8px 6px 2px;border-top:1px solid #afbdaf;margin-top:6px}
+.clay-site .selection-multi-done{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 20px;border:1px solid #173f2a;border-radius:0;background:#173f2a;color:#f3f5ef;font:600 16px/1.3 'Source Sans 3',Arial,sans-serif;cursor:pointer}
+.clay-site .selection-multi-done:hover{background:#365e43;border-color:#365e43}
+.clay-site .selection-calendar{padding:12px}
+.clay-site .selection-calendar-head{display:grid;grid-template-columns:36px minmax(0,1fr) 36px;gap:6px;align-items:center;margin-bottom:12px}
+.clay-site .selection-calendar-period{display:grid;grid-template-columns:minmax(0,1fr) 68px;gap:6px;min-width:0}
+.clay-site .selection-calendar-period .selection-trigger{padding:9px 8px;gap:4px;min-height:44px;font-size:15px}
+.clay-site .selection-calendar-period input{width:100%;min-width:0;min-height:44px;padding:8px 4px;border:1px solid #738674;background:#f8faf5;color:#102d1d;border-radius:0;font:400 16px/1.3 'Source Sans 3',Arial,sans-serif;appearance:textfield;text-align:center}
+.clay-site .selection-calendar-period input::-webkit-inner-spin-button,.clay-site .selection-calendar-period input::-webkit-outer-spin-button{appearance:none;margin:0}
+.clay-site .selection-icon-button{width:36px;height:44px;min-width:36px;display:grid;place-items:center;padding:0;border:0;border-radius:0;background:transparent;color:#102d1d;cursor:pointer}
+.clay-site .selection-icon-button:hover{background:#e4eadf}
+.clay-site .selection-icon-button:disabled{opacity:.35;cursor:default}
+.clay-site .selection-weekdays,.clay-site .selection-calendar-grid>[role=row]{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.clay-site .selection-weekdays{font-size:13px;color:#4c6253;text-align:center;padding:6px 0}
+.clay-site .selection-calendar-grid [role=gridcell]{display:grid;place-items:center;width:100%;min-width:0;min-height:38px;padding:5px 0;border:1px solid transparent;border-radius:0;background:transparent;color:#102d1d;font:400 16px/1.2 'Source Sans 3',Arial,sans-serif;text-align:center}
+.clay-site .selection-calendar-grid button{cursor:pointer}
+.clay-site .selection-calendar-grid button:hover{background:#e4eadf}
+.clay-site .selection-calendar-grid [aria-current=date]{border-color:#738674}
+.clay-site .selection-calendar-grid [aria-selected=true]{background:#173f2a;color:#f3f5ef;border-color:#173f2a;font-weight:600}
+.clay-site .selection-calendar-grid button:disabled{color:#4c6253;opacity:.35;cursor:default}
+.clay-site .selection-calendar-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px;margin-top:12px;padding-top:8px;border-top:1px solid #afbdaf}
+.clay-site .selection-calendar-footer button{padding:8px 10px;min-height:44px;border:0;border-radius:0;background:transparent;color:#173f2a;font:600 15px/1.3 'Source Sans 3',Arial,sans-serif;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
+.clay-site .selection-calendar-footer button:hover{background:#e4eadf}
+.clay-site .selection-calendar-footer button:disabled{opacity:.4;cursor:default}
+@media(max-width:760px){.clay-site .mobile-menu .selection-role{width:100%;margin-top:16px}.clay-site .selection-calendar{padding:10px}.clay-site .selection-calendar-period .selection-trigger{font-size:14px}.clay-site .selection-calendar-grid [role=gridcell]{min-height:38px}}
+@media(forced-colors:active){.clay-site .selection-trigger,.clay-site .selection-popup,.clay-site .selection-calendar-period input{border-color:ButtonText}.clay-site .selection-option[aria-selected=true],.clay-site .selection-calendar-grid [aria-selected=true]{background:Highlight;color:HighlightText}.clay-site .selection-option.is-active{outline:1px solid Highlight}.clay-site .selection-icon{forced-color-adjust:auto}}

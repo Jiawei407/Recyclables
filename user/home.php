@@ -4,6 +4,8 @@ $page_role='user';
 require __DIR__ . '/../includes/bootstrap.php';
 require __DIR__ . '/../includes/data.php';
 require __DIR__ . '/../includes/metrics.php';
+require __DIR__ . '/../includes/dashboard.php';
+$dashboard=participant_dashboard((int)$uid);
 ?>
 <!DOCTYPE html>
 <html lang="en" class="workspace-page">
@@ -119,8 +121,8 @@ require __DIR__ . '/../includes/metrics.php';
                 <path d="m4 21 11-11"></path>
               </svg>
             </div>
-            <p class="metric-value"><?php echo e(metric('Current rank  No activity recorded yet.')); ?></p>
-            <p class="metric-note">No activity recorded yet.</p>
+            <p class="metric-value"><?php echo e(metric('Current rank')); ?></p>
+            <p class="metric-note">Among active participants.</p>
           </article>
           <article class="metric">
             <div class="metric-label">
@@ -138,7 +140,13 @@ require __DIR__ . '/../includes/metrics.php';
             <div class="panel-heading">
               <h2>Your active challenge</h2>
             </div>
-            <p>No active challenge selected.</p>
+            <?php if ($dashboard['active_challenge']): $active=$dashboard['active_challenge']; ?>
+            <div data-record>
+              <h3><?= e($active['title']) ?></h3>
+              <p>Closes <?= e($active['end_date']) ?></p>
+              <a class="text-link" href="../user/challenges-view-challenge.php?id=<?= (int)$active['id'] ?>">View challenge</a>
+            </div>
+            <?php else: ?><p>No active challenge selected.</p><?php endif; ?>
             <a class="button button--primary" href="../user/challenges-browse.php">Browse challenges</a>
           </section>
           <section class="panel">
@@ -146,7 +154,14 @@ require __DIR__ . '/../includes/metrics.php';
               <h2>Your next milestone</h2>
             </div>
             <a class="text-link" href="../user/achievements-locked.php">See locked achievements</a>
-            <p>No milestone selected. Milestones will appear when achievements are available.</p>
+            <?php if ($dashboard['milestone']): $milestone=$dashboard['milestone']; ?>
+            <div data-record>
+              <h3><?= e($milestone['badge']['name']) ?></h3>
+              <?php foreach ($milestone['rules'] as $rule): ?>
+              <p><?= e($rule['item']) ?>: <?= (int)$rule['progress'] ?> / <?= (int)$rule['required_count'] ?> (<?= e($rule['condition_name']) ?>)</p>
+              <?php endforeach; ?>
+            </div>
+            <?php else: ?><p>No locked milestones with requirements are available.</p><?php endif; ?>
           </section>
         </div>
         <div class="grid-2">
@@ -173,9 +188,14 @@ require __DIR__ . '/../includes/metrics.php';
               <h2>Your activity</h2>
             </div>
             <ol class="activity-list">
-              <li>
-                <strong>No activity recorded yet.</strong>
+              <?php if (!$dashboard['activity']): ?><li><strong>No activity recorded yet.</strong></li><?php endif; ?>
+              <?php foreach ($dashboard['activity'] as $activity): ?>
+              <li data-record>
+                <strong><?= e($activity['title']) ?></strong>
+                <p><?php if ($activity['kind'] === 'submission'): ?>Evidence: <?= e(ucfirst(str_replace('-',' ',$activity['status']))) ?><?php elseif ($activity['kind'] === 'points'): ?><?= (int)$activity['points'] > 0 ? '+' : '' ?><?= (int)$activity['points'] ?> Green Points<?php else: ?>Joined challenge<?php endif; ?></p>
+                <time datetime="<?= e(str_replace(' ','T',$activity['occurred_at'])) ?>"><?= e($activity['occurred_at']) ?></time>
               </li>
+              <?php endforeach; ?>
             </ol>
           </section>
         </div>
